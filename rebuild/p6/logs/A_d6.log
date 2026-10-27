@@ -1,0 +1,24 @@
+== P6-A D6 鉴别力（判据已预注册冻结） ==
+
+D6_BIJECTION_MAP 键数=16（用于置换 payload 的双射）
+--- tuning_s1: 账本 21 条, holdout 真值分布 {'q0': 3, 'q1': 3, 'q2': 3} ---
+  learn_table_equivariant      E=0.00 R=1 I=1 acc=1.00 原D6通过=1 d6v2通过=1
+  constant_q0                  E=0.00 R=0 I=1 acc=0.33 原D6通过=1 d6v2通过=0
+  tau_keyed_unresponsive       E=0.00 R=1 I=1 acc=0.33 原D6通过=1 d6v2通过=1
+  wrong_map_response           E=0.67 R=1 I=1 acc=0.33 原D6通过=0 d6v2通过=0
+  irrelevant_position_response E=0.22 R=1 I=0 acc=0.44 原D6通过=0 d6v2通过=0
+  anti_equivariant             E=0.67 R=1 I=1 acc=1.00 原D6通过=0 d6v2通过=0
+--- heldout_s5: 账本 21 条, holdout 真值分布 {'q0': 3, 'q1': 3, 'q2': 3} ---
+  learn_table_equivariant      E=0.00 R=1 I=1 acc=1.00 原D6通过=1 d6v2通过=1
+  constant_q0                  E=0.00 R=0 I=1 acc=0.33 原D6通过=1 d6v2通过=0
+  tau_keyed_unresponsive       E=0.00 R=1 I=1 acc=0.33 原D6通过=1 d6v2通过=1
+  wrong_map_response           E=0.67 R=1 I=1 acc=0.33 原D6通过=0 d6v2通过=0
+  irrelevant_position_response E=0.22 R=1 I=0 acc=0.44 原D6通过=0 d6v2通过=0
+  anti_equivariant             E=0.67 R=1 I=1 acc=1.00 原D6通过=0 d6v2通过=0
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/D6_RESULTS.csv
+
+冻结失败判据核对（留出集）：
+  constant 通过 d6v2？ False (必须 False)
+  tau_keyed 通过 d6v2？ True (必须 False)
+  learn_table 通过 d6v2？ True (必须 True)

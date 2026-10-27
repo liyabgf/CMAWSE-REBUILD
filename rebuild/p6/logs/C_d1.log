@@ -1,0 +1,35 @@
+== P6-C D1 效度重设计 ==
+
+阶段一（预注册）：调参集 s1 冻结 δ* = -0.3333 (majority -0.667, oracle 0.000)
+  调参集基线 acc_base = 1.000（X 边际在 N=9 平衡集上接近完美）
+--- 留出集 s5 · 预注册 d1v2 ---
+  constant_q0          acc=0.333 delta=-0.667 b/c=0/6 p=0.046 pass=False
+  majority_class       acc=0.333 delta=-0.667 b/c=0/6 p=0.046 pass=False
+  random               acc=0.444 delta=-0.556 b/c=0/5 p=0.091 pass=False
+  simple_baseline_v2   acc=1.000 delta=+0.000 b/c=0/0 p=1.000 pass=False
+  learned_agent        acc=1.000 delta=+0.000 b/c=0/0 p=1.000 pass=False
+  oracle               acc=1.000 delta=+0.000 b/c=0/0 p=1.000 pass=False
+  预注册判据通过者: 无（oracle 也未通过 -> 检验功效不足，阶段一 INSUFFICIENT）
+
+--- 阶段二（事后 d1v2b，N=36，δ*=0.15 + 敏感性曲线） ---
+  留出集 s5 基线 acc_base = 20/36
+  constant_q0          acc=0.556 delta=+0.000 b/c=16/16 p_raw=1.0000 p_bonf=1.000 pass=False
+  majority_class       acc=0.222 delta=-0.333 b/c=0/12 p_raw=0.0007 p_bonf=0.004 pass=False
+  random               acc=0.417 delta=-0.139 b/c=6/11 p_raw=0.3323 p_bonf=1.000 pass=False
+  simple_baseline_v2   acc=0.556 delta=+0.000 b/c=0/0 p_raw=1.0000 p_bonf=1.000 pass=False
+  learned_agent        acc=0.556 delta=+0.000 b/c=0/0 p_raw=1.0000 p_bonf=1.000 pass=False
+  oracle               acc=1.000 delta=+0.444 b/c=16/0 p_raw=0.0000 p_bonf=0.000 pass=True
+  阈值敏感性（p_raw<0.05 且 acc>=0.5 前提下 delta 阈值 -> 通过主体集）:
+    δ*=0.00: ['oracle']
+    δ*=0.05: ['oracle']
+    δ*=0.10: ['oracle']
+    δ*=0.15: ['oracle']
+    δ*=0.20: ['oracle']
+    δ*=0.25: ['oracle']
+    δ*=0.30: ['oracle']
+    δ*=0.35: ['oracle']
+    δ*=0.40: ['oracle']
+  不变性网格（语义保持变换不得翻转结论）:
+    结论翻转数 = 0（全部语义保持变换下结论一致）
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/D1_RESULTS.csv / /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/D1_PERMUTATION_RESULTS.csv / /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/D1_THRESHOLD_SENSITIVITY.csv

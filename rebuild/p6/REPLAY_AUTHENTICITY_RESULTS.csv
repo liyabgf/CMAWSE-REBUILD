@@ -1,0 +1,13 @@
+case,tamper,V1_cli,V2_consistency,V3_chain_root,V4_chain_only,expected_v3,note
+legitimate_record,YES,ACCEPT,ACCEPT,ACCEPT,ACCEPT,ACCEPT,合法记录不得误拒
+tamper_action_same_outcome,YES,ACCEPT,ACCEPT,REJECT,ACCEPT,REJECT,关键案例：内部一致但内容不真（P5 盲区）
+tamper_action_outcome_changing,YES,REJECT,REJECT,REJECT,ACCEPT,REJECT,一致性亦可检出
+tamper_next_state,YES,REJECT,REJECT,REJECT,ACCEPT,REJECT,
+reorder_events,YES,REJECT,REJECT,REJECT,ACCEPT,REJECT,顺序语义在账本内
+duplicate_event,YES,REJECT,REJECT,REJECT,ACCEPT,REJECT,
+drop_event,YES,REJECT,REJECT,REJECT,ACCEPT,REJECT,
+session_relabel_consistent,YES,ACCEPT,ACCEPT,UNDETERMINED,ACCEPT,REJECT,V3: 见证按 idx 绑定，idx2 无见证 -> UNDETERMINED/REJECT
+corrupt_json_line,YES,REJECT(JSONDecodeError),REJECT(parse),UNDETERMINED(parse fail),REJECT(parse),UNDETERMINED,坏行无法解析 -> 拒绝验证
+missing_witness,NO,ACCEPT,ACCEPT,UNDETERMINED,ACCEPT,UNDETERMINED,见证缺失不得默认真实
+recompute_chain_no_root,YES,ACCEPT,ACCEPT,REJECT,ACCEPT,REJECT,V4 无带外根不可检出（演示）；V3 检出
+rewrite_log_and_witness(trust boundary),YES,ACCEPT,ACCEPT,ACCEPT(实证),ACCEPT,ACCEPT(边界内不可检出),攻击者同时改写账本与见证库：超出参照信任假设，实证记录

@@ -1,0 +1,97 @@
+case,arm,crash,parse_failures,record_complete,continued,invalid_accepted_as_valid,silent_conversion,rejection_traceable
+valid_oracle,A1_orig,NO,0,True,True,False,False,False
+valid_oracle,A2_wrapper,NO,0,True,True,False,False,False
+valid_oracle,A3_native,NO,0,True,True,False,False,False
+valid_oracle,A4_twin,NO,0,True,True,False,False,False
+none,A1_orig,NO,2,True,True,False,False,False
+none,A2_wrapper,NO,2,True,True,False,False,True
+none,A3_native,NO,2,True,True,False,False,False
+none,A4_twin,AttributeError: 'NoneType' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+str,A1_orig,NO,2,True,True,False,False,False
+str,A2_wrapper,NO,2,True,True,False,False,True
+str,A3_native,NO,2,True,True,False,False,False
+str,A4_twin,AttributeError: 'str' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+raise,A1_orig,NO,2,True,True,False,False,False
+raise,A2_wrapper,NO,2,True,True,False,False,False
+raise,A3_native,NO,2,True,True,False,False,False
+raise,A4_twin,RuntimeError: LLM crash,N/A,False,False,N/A-crash,N/A,False
+list,A1_orig,NO,2,True,True,False,False,False
+list,A2_wrapper,NO,2,True,True,False,False,True
+list,A3_native,NO,2,True,True,False,False,False
+list,A4_twin,AttributeError: 'list' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+d1_int,A1_orig,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+d1_int,A2_wrapper,NO,2,True,True,False,False,True
+d1_int,A3_native,NO,2,True,True,False,False,False
+d1_int,A4_twin,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+d2_str,A1_orig,NO,0,True,True,False,False,False
+d2_str,A2_wrapper,NO,2,True,True,False,False,True
+d2_str,A3_native,NO,2,True,True,False,False,False
+d2_str,A4_twin,NO,0,True,True,False,False,False
+d2_nested_int,A1_orig,NO,0,True,True,False,False,False
+d2_nested_int,A2_wrapper,NO,2,True,True,False,False,True
+d2_nested_int,A3_native,NO,2,True,True,False,False,False
+d2_nested_int,A4_twin,NO,0,True,True,False,False,False
+empty_dict,A1_orig,NO,0,True,True,False,False,False
+empty_dict,A2_wrapper,NO,2,True,True,False,False,True
+empty_dict,A3_native,NO,2,True,True,False,False,False
+empty_dict,A4_twin,NO,0,True,True,False,False,False
+extra_fields,A1_orig,NO,0,True,True,False,False,False
+extra_fields,A2_wrapper,NO,2,True,True,False,False,True
+extra_fields,A3_native,NO,2,True,True,False,False,False
+extra_fields,A4_twin,NO,0,True,True,False,False,False
+d5_empty,A1_orig,NO,0,True,True,False,False,False
+d5_empty,A2_wrapper,NO,2,True,True,False,False,True
+d5_empty,A3_native,NO,2,True,True,False,False,False
+d5_empty,A4_twin,NO,0,True,True,False,False,False
+d5_illegal_enum,A1_orig,NO,0,True,True,False,False,False
+d5_illegal_enum,A2_wrapper,NO,2,True,True,False,False,True
+d5_illegal_enum,A3_native,NO,2,True,True,False,False,False
+d5_illegal_enum,A4_twin,NO,0,True,True,False,False,False
+d5_long_10000,A1_orig,NO,0,True,True,False,False,False
+d5_long_10000,A2_wrapper,NO,2,True,True,False,False,True
+d5_long_10000,A3_native,NO,2,True,True,False,False,False
+d5_long_10000,A4_twin,NO,0,True,True,False,False,False
+multi_field,A1_orig,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+multi_field,A2_wrapper,NO,2,True,True,False,False,True
+multi_field,A3_native,NO,2,True,True,False,False,False
+multi_field,A4_twin,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,N/A,False
+d1_int_keys,A1_orig,NO,0,True,True,False,False,False
+d1_int_keys,A2_wrapper,NO,2,True,True,False,False,True
+d1_int_keys,A3_native,NO,2,True,True,False,False,False
+d1_int_keys,A4_twin,NO,0,True,True,False,False,False
+welltyped_semantic_wrong,A1_orig,NO,0,True,True,False,False,False
+welltyped_semantic_wrong,A2_wrapper,NO,0,True,True,False,False,False
+welltyped_semantic_wrong,A3_native,NO,0,True,True,False,False,False
+welltyped_semantic_wrong,A4_twin,NO,0,True,True,False,False,False
+d4_nested_int,A1_orig,NO,0,True,True,False,False,False
+d4_nested_int,A2_wrapper,NO,2,True,True,False,False,True
+d4_nested_int,A3_native,NO,2,True,True,False,False,False
+d4_nested_int,A4_twin,NO,0,True,True,False,False,False
+d1_value_dict,A1_orig,NO,1,True,True,False,False,False
+d1_value_dict,A2_wrapper,NO,2,True,True,False,False,True
+d1_value_dict,A3_native,NO,2,True,True,False,False,False
+d1_value_dict,A4_twin,NO,0,True,True,False,False,False
+d5_len256_boundary_ok,A1_orig,NO,0,True,True,False,False,False
+d5_len256_boundary_ok,A2_wrapper,NO,0,True,True,False,False,False
+d5_len256_boundary_ok,A3_native,NO,0,True,True,False,False,False
+d5_len256_boundary_ok,A4_twin,NO,0,True,True,False,False,False
+d5_len257_boundary,A1_orig,NO,0,True,True,False,False,False
+d5_len257_boundary,A2_wrapper,NO,2,True,True,False,False,True
+d5_len257_boundary,A3_native,NO,2,True,True,False,False,False
+d5_len257_boundary,A4_twin,NO,0,True,True,False,False,False
+d5_unicode,A1_orig,NO,0,True,True,False,False,False
+d5_unicode,A2_wrapper,NO,2,True,True,False,False,True
+d5_unicode,A3_native,NO,2,True,True,False,False,False
+d5_unicode,A4_twin,NO,0,True,True,False,False,False
+d5_bool,A1_orig,NO,0,True,True,False,False,False
+d5_bool,A2_wrapper,NO,2,True,True,False,False,True
+d5_bool,A3_native,NO,2,True,True,False,False,False
+d5_bool,A4_twin,NO,0,True,True,False,False,False
+d1_nested_extra,A1_orig,NO,0,True,True,False,False,False
+d1_nested_extra,A2_wrapper,NO,2,True,True,False,False,True
+d1_nested_extra,A3_native,NO,2,True,True,False,False,False
+d1_nested_extra,A4_twin,NO,0,True,True,False,False,False
+d4_illegal_enum,A1_orig,NO,0,True,True,False,False,False
+d4_illegal_enum,A2_wrapper,NO,2,True,True,False,False,True
+d4_illegal_enum,A3_native,NO,2,True,True,False,False,False
+d4_illegal_enum,A4_twin,NO,0,True,True,False,False,False

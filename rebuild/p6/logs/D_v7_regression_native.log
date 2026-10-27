@@ -1,0 +1,14 @@
+test_canonical_replay_cli (__main__.TestPhaseIIConformance.test_canonical_replay_cli) ... ok
+test_d0_architectural_isolation_and_interception (__main__.TestPhaseIIConformance.test_d0_architectural_isolation_and_interception)
+Verifies that in-place mutations do not infect runtime and illegal actions are rejected. ... ok
+test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance.test_d1_oracle_passes_and_dummy_fails) ... ok
+test_d2_evaluator_strictness (__main__.TestPhaseIIConformance.test_d2_evaluator_strictness) ... ok
+test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance.test_d3_study_level_aggregate_wilcoxon)
+Generates multi-session data and verifies D3 study-level Wilcoxon-Pratt. ... ok
+test_d5_hypothetical_branch (__main__.TestPhaseIIConformance.test_d5_hypothetical_branch) ... ok
+test_d6_bijective_permutation_evaluator (__main__.TestPhaseIIConformance.test_d6_bijective_permutation_evaluator) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.066s
+
+OK

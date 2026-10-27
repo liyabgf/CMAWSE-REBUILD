@@ -1,0 +1,10 @@
+threshold,passing_subjects
+0.0,oracle
+0.05,oracle
+0.1,oracle
+0.15,oracle
+0.2,oracle
+0.25,oracle
+0.3,oracle
+0.35,oracle
+0.4,oracle

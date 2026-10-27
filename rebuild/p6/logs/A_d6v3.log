@@ -1,0 +1,25 @@
+== P6-A d6v3（事后修订，非预注册；含全新会话 s7 验证） ==
+
+--- tuning_s1 ---
+  learn_table_equivariant      E=0.00 R2=1 I=1 acc=1.00 d6v3=1
+  constant_q0                  E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  tau_keyed_unresponsive       E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  wrong_map_response           E=0.67 R2=1 I=1 acc=0.33 d6v3=0
+  irrelevant_position_response E=0.22 R2=1 I=0 acc=0.44 d6v3=0
+  anti_equivariant             E=0.67 R2=1 I=1 acc=1.00 d6v3=0
+--- heldout_s5 ---
+  learn_table_equivariant      E=0.00 R2=1 I=1 acc=1.00 d6v3=1
+  constant_q0                  E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  tau_keyed_unresponsive       E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  wrong_map_response           E=0.67 R2=1 I=1 acc=0.33 d6v3=0
+  irrelevant_position_response E=0.22 R2=1 I=0 acc=0.44 d6v3=0
+  anti_equivariant             E=0.67 R2=1 I=1 acc=1.00 d6v3=0
+--- fresh_s7(never used before) ---
+  learn_table_equivariant      E=0.00 R2=1 I=1 acc=1.00 d6v3=1
+  constant_q0                  E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  tau_keyed_unresponsive       E=0.00 R2=0 I=1 acc=0.33 d6v3=0
+  wrong_map_response           E=0.67 R2=1 I=1 acc=0.33 d6v3=0
+  irrelevant_position_response E=0.22 R2=1 I=0 acc=0.44 d6v3=0
+  anti_equivariant             E=0.67 R2=1 I=1 acc=1.00 d6v3=0
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/D6_RESULTS_V3.csv

@@ -1,0 +1,108 @@
+== P6-D typecheck 原生化实验 ==
+native 副本: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/native/CMAWSE_v1_0_3_EXPERIMENT_HARNESS.py
+
+回归验收：A3 原生化副本上 v7 = 7/7 OK (exit=0)
+
+  A1_orig    valid_oracle               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper valid_oracle               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A3_native  valid_oracle               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A4_twin    valid_oracle               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    none                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A2_wrapper none                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  none                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    none                       crash=AttributeError: 'NoneType' object has  pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    str                        crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A2_wrapper str                        crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  str                        crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    str                        crash=AttributeError: 'str' object has no at pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    raise                      crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A2_wrapper raise                      crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  raise                      crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    raise                      crash=RuntimeError: LLM crash                pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    list                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A2_wrapper list                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  list                       crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    list                       crash=AttributeError: 'list' object has no a pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    d1_int                     crash=AttributeError: 'int' object has no at pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A2_wrapper d1_int                     crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d1_int                     crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d1_int                     crash=AttributeError: 'int' object has no at pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    d2_str                     crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d2_str                     crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d2_str                     crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d2_str                     crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d2_nested_int              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d2_nested_int              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d2_nested_int              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d2_nested_int              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    empty_dict                 crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper empty_dict                 crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  empty_dict                 crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    empty_dict                 crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    extra_fields               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper extra_fields               crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  extra_fields               crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    extra_fields               crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_empty                   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_empty                   crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_empty                   crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_empty                   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_illegal_enum            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_illegal_enum            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_illegal_enum            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_illegal_enum            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_long_10000              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_long_10000              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_long_10000              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_long_10000              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    multi_field                crash=AttributeError: 'int' object has no at pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A2_wrapper multi_field                crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  multi_field                crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    multi_field                crash=AttributeError: 'int' object has no at pf=N/A  complete=False invalid_ok=N/A-crash silent=N/A
+  A1_orig    d1_int_keys                crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d1_int_keys                crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d1_int_keys                crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d1_int_keys                crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    welltyped_semantic_wrong   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper welltyped_semantic_wrong   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A3_native  welltyped_semantic_wrong   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A4_twin    welltyped_semantic_wrong   crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d4_nested_int              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d4_nested_int              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d4_nested_int              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d4_nested_int              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d1_value_dict              crash=NO                                     pf=1    complete=True invalid_ok=False silent=False
+  A2_wrapper d1_value_dict              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d1_value_dict              crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d1_value_dict              crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_len256_boundary_ok      crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_len256_boundary_ok      crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A3_native  d5_len256_boundary_ok      crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A4_twin    d5_len256_boundary_ok      crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_len257_boundary         crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_len257_boundary         crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_len257_boundary         crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_len257_boundary         crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_unicode                 crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_unicode                 crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_unicode                 crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_unicode                 crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d5_bool                    crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d5_bool                    crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d5_bool                    crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d5_bool                    crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d1_nested_extra            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d1_nested_extra            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d1_nested_extra            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d1_nested_extra            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A1_orig    d4_illegal_enum            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+  A2_wrapper d4_illegal_enum            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A3_native  d4_illegal_enum            crash=NO                                     pf=2    complete=True invalid_ok=False silent=False
+  A4_twin    d4_illegal_enum            crash=NO                                     pf=0    complete=True invalid_ok=False silent=False
+
+汇总:
+  A1_orig: crashes=2, complete=22/24, invalid_accepted=0, silent_conv=0, 误拒(valid pf>0)=0
+  A2_wrapper: crashes=0, complete=24/24, invalid_accepted=0, silent_conv=0, 误拒(valid pf>0)=0
+  A3_native: crashes=0, complete=24/24, invalid_accepted=0, silent_conv=0, 误拒(valid pf>0)=0
+  A4_twin: crashes=6, complete=18/24, invalid_accepted=0, silent_conv=0, 误拒(valid pf>0)=0
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/TYPECHECK_REGRESSION_RESULTS.csv rows=96

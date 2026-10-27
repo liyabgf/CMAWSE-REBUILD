@@ -1,0 +1,19 @@
+set,agent,E_equivariance,R2_label_exchange,I_order_invariant,accuracy,d6v3_pass
+tuning_s1,learn_table_equivariant,0.0,True,True,1.0,True
+tuning_s1,constant_q0,0.0,False,True,0.3333333333333333,False
+tuning_s1,tau_keyed_unresponsive,0.0,False,True,0.3333333333333333,False
+tuning_s1,wrong_map_response,0.6666666666666666,True,True,0.3333333333333333,False
+tuning_s1,irrelevant_position_response,0.2222222222222222,True,False,0.4444444444444444,False
+tuning_s1,anti_equivariant,0.6666666666666666,True,True,1.0,False
+heldout_s5,learn_table_equivariant,0.0,True,True,1.0,True
+heldout_s5,constant_q0,0.0,False,True,0.3333333333333333,False
+heldout_s5,tau_keyed_unresponsive,0.0,False,True,0.3333333333333333,False
+heldout_s5,wrong_map_response,0.6666666666666666,True,True,0.3333333333333333,False
+heldout_s5,irrelevant_position_response,0.2222222222222222,True,False,0.4444444444444444,False
+heldout_s5,anti_equivariant,0.6666666666666666,True,True,1.0,False
+fresh_s7(never used before),learn_table_equivariant,0.0,True,True,1.0,True
+fresh_s7(never used before),constant_q0,0.0,False,True,0.3333333333333333,False
+fresh_s7(never used before),tau_keyed_unresponsive,0.0,False,True,0.3333333333333333,False
+fresh_s7(never used before),wrong_map_response,0.6666666666666666,True,True,0.3333333333333333,False
+fresh_s7(never used before),irrelevant_position_response,0.2222222222222222,True,False,0.4444444444444444,False
+fresh_s7(never used before),anti_equivariant,0.6666666666666666,True,True,1.0,False

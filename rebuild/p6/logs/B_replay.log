@@ -1,0 +1,17 @@
+== P6-B 重放真实性 ==
+
+  legitimate_record                      V1=ACCEPT                   V2=ACCEPT             V3=ACCEPT                       预期V3=ACCEPT
+  tamper_action_same_outcome             V1=ACCEPT                   V2=ACCEPT             V3=REJECT                       预期V3=REJECT
+  tamper_action_outcome_changing         V1=REJECT                   V2=REJECT             V3=REJECT                       预期V3=REJECT
+  tamper_next_state                      V1=REJECT                   V2=REJECT             V3=REJECT                       预期V3=REJECT
+  reorder_events                         V1=REJECT                   V2=REJECT             V3=REJECT                       预期V3=REJECT
+  duplicate_event                        V1=REJECT                   V2=REJECT             V3=REJECT                       预期V3=REJECT
+  drop_event                             V1=REJECT                   V2=REJECT             V3=REJECT                       预期V3=REJECT
+  session_relabel_consistent             V1=ACCEPT                   V2=ACCEPT             V3=UNDETERMINED                 预期V3=REJECT
+  corrupt_json_line                      V1=REJECT(JSONDecodeError)  V2=REJECT(parse)      V3=UNDETERMINED(parse fail)     预期V3=UNDETERMINED
+  missing_witness                        V1=ACCEPT                   V2=ACCEPT             V3=UNDETERMINED                 预期V3=UNDETERMINED
+  recompute_chain_no_root                V1=ACCEPT                   V2=ACCEPT             V3=REJECT                       预期V3=REJECT
+  rewrite_log_and_witness(trust boundary) V1=ACCEPT                   V2=ACCEPT             V3=ACCEPT(实证)                   预期V3=ACCEPT(边界内不可检出)
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p6/REPLAY_AUTHENTICITY_RESULTS.csv
+临时工件: /var/folders/cb/dx90h3g57qsc4fj38007t68c0000gn/T/p6b_kuijw3vi
