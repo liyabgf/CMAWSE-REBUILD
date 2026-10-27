@@ -1,0 +1,32 @@
+== P7-A2 d1v2b 独立验证（s11/s13，冻结判据：acc>=0.5 ∧ delta>=0.15 ∧ p_raw<0.05）==
+
+ground_truth_transition 源码 K 无关性：context 参数不参与条件 C 转移 = True（已读源码核实）
+
+--- session 11 ---
+  oracle 泄漏审计：rule_oracle 与 label_oracle 预测完全一致 = True（基线 acc = 18/30）
+  constant_q0          acc=0.600 delta=+0.000 b/c=12/12 p=1.00000 pass=False
+  majority_class       acc=0.200 delta=-0.400 b/c=0/12 p=0.00073 pass=False
+  random               acc=0.467 delta=-0.133 b/c=7/11 p=0.48068 pass=False
+  simple_baseline_v2   acc=0.600 delta=+0.000 b/c=0/0 p=1.00000 pass=False
+  learned_agent        acc=0.600 delta=+0.000 b/c=0/0 p=1.00000 pass=False
+  rule_oracle          acc=1.000 delta=+0.400 b/c=12/0 p=0.00073 pass=True
+  K/ctx 无关扰动：换 context 重算 y 全部不变 = 30/30
+  语义保持变换（3 重命名 × 4 排列 × 6 主体）：翻转数 = 0
+
+--- session 13 ---
+  oracle 泄漏审计：rule_oracle 与 label_oracle 预测完全一致 = True（基线 acc = 18/30）
+  constant_q0          acc=0.600 delta=+0.000 b/c=12/12 p=1.00000 pass=False
+  majority_class       acc=0.200 delta=-0.400 b/c=0/12 p=0.00073 pass=False
+  random               acc=0.467 delta=-0.133 b/c=7/11 p=0.48068 pass=False
+  simple_baseline_v2   acc=0.600 delta=+0.000 b/c=0/0 p=1.00000 pass=False
+  learned_agent        acc=0.600 delta=+0.000 b/c=0/0 p=1.00000 pass=False
+  rule_oracle          acc=1.000 delta=+0.400 b/c=12/0 p=0.00073 pass=True
+  K/ctx 无关扰动：换 context 重算 y 全部不变 = 30/30
+  语义保持变换（3 重命名 × 4 排列 × 6 主体）：翻转数 = 0
+阈值敏感性（p_raw<0.05 ∧ acc>=0.5 前提下 delta 阈值 -> 通过主体集）:
+  δ*=0.00: ['rule_oracle']
+  δ*=0.15: ['rule_oracle']
+  δ*=0.25: ['rule_oracle']
+  δ*=0.35: ['rule_oracle']
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p7/D1V2B_RESULTS.csv rows=156

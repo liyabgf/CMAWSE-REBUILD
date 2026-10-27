@@ -1,0 +1,15 @@
+== P7-C Branch A 执行验证 ==
+副本 sha256 与 extracted 一致：ALL (['cmawse/core/schema.py', 'cmawse/world/bus.py'])
+
+  C1_out_of_range_not_visible  PASS  obs={}
+  C2_in_range_visible          PASS  obs={'c': Vector3D(x=10.0, y=0.0, z=0.0)}
+  C3a_horizon_attr_frozen      PASS  obs=ValidationError
+  C3b_horizon_dict_mutation    FAIL  obs=in-place dict mutation ACCEPTED（机制缺口）
+  C4_acoustic_attenuation      PASS  obs=far=0, near=1
+  C5_sensory_deprived_empty    PASS  obs=vis=0, aud=0
+  C6_deterministic_replay      PASS  obs=equal
+  C7_witness_qualification     PASS  obs=['a', 'c']
+
+可执行子集案例：7/8 PASS
+不可执行断裂面：agent.cognitive_state / agent.deliberation / agent.representation 不在提取树；agent.llm_boundary 仅 quarantine compile=FAIL；测试层需 pytest（已装）但 import 链断于上述缺失模块。
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p7/BRANCH_A_RESULTS.csv rows=10

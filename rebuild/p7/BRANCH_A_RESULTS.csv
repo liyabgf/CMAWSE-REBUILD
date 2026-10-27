@@ -1,0 +1,11 @@
+case,detail,expected,observed,verdict
+PROVENANCE,cmawse/core/schema.py,byte-identical,94a410a6e157c3de...,MATCH
+PROVENANCE,cmawse/world/bus.py,byte-identical,3a9c976e32b23771...,MATCH
+C1_out_of_range_not_visible,dist=100 > limit=15,b 不在 a 的 visible_actors,{},PASS
+C2_in_range_visible,dist=10 <= 15,c 可见,"{'c': Vector3D(x=10.0, y=0.0, z=0.0)}",PASS
+C3a_horizon_attr_frozen,hz.tick = 5,拒绝,ValidationError,PASS
+C3b_horizon_dict_mutation,hz.visible_actors['b'] = pos,拒绝（理想）,in-place dict mutation ACCEPTED（机制缺口）,FAIL
+C4_acoustic_attenuation,60dB@100m vs 60dB@2m,远者不可闻/近者可闻,"far=0, near=1",PASS
+C5_sensory_deprived_empty,剥夺者 10m 内 90dB 发声,无感知,"vis=0, aud=0",PASS
+C6_deterministic_replay,generate_horizons 两次,逐主体相等,equal,PASS
+C7_witness_qualification,直接参与合格 / 视听外非参与者不合格,"a,c in; b out","['a', 'c']",PASS

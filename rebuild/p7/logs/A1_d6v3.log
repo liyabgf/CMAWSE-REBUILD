@@ -1,0 +1,38 @@
+== P7-A1 d6v3 独立验证（s11/s13，冻结） ==
+
+--- session 11 ---
+  learn_table(P6)                  E=0.00 E2=0.00 R2=1 I=1 acc=1.00 full=1
+  constant_q0(P6)                  E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  tau_keyed(P6)                    E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  wrong_map(P6)                    E=0.67 E2=0.00 R2=1 I=1 acc=0.33 full=0
+  irrelevant_position(P6)          E=0.22 E2=0.00 R2=1 I=0 acc=0.44 full=0
+  anti_equivariant(P6)             E=0.67 E2=0.67 R2=1 I=1 acc=1.00 full=0
+  partial_target_responder(P7)     E=0.33 E2=0.33 R2=0 I=1 acc=0.67 full=0
+  seen_correct_unseen_fail(P7)     E=0.00 E2=0.00 R2=1 I=1 acc=1.00 full=1
+  order_sensitive_equivariant(P7)  E=0.00 E2=0.00 R2=1 I=0 acc=0.33 full=0
+  range_limited_degrade(P7)        E=0.33 E2=0.33 R2=0 I=1 acc=0.67 full=0
+  tau_hash_rich(P7)                E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  memoizer_gaming(P7)              E=0.00 E2=0.00 R2=0 I=1 acc=1.00 full=0
+
+--- session 13 ---
+  learn_table(P6)                  E=0.00 E2=0.00 R2=1 I=1 acc=1.00 full=1
+  constant_q0(P6)                  E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  tau_keyed(P6)                    E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  wrong_map(P6)                    E=0.67 E2=0.00 R2=1 I=1 acc=0.33 full=0
+  irrelevant_position(P6)          E=0.22 E2=0.00 R2=1 I=0 acc=0.44 full=0
+  anti_equivariant(P6)             E=0.67 E2=0.67 R2=1 I=1 acc=1.00 full=0
+  partial_target_responder(P7)     E=0.33 E2=0.33 R2=0 I=1 acc=0.67 full=0
+  seen_correct_unseen_fail(P7)     E=0.00 E2=0.00 R2=1 I=1 acc=1.00 full=1
+  order_sensitive_equivariant(P7)  E=0.00 E2=0.00 R2=1 I=0 acc=0.33 full=0
+  range_limited_degrade(P7)        E=0.33 E2=0.33 R2=0 I=1 acc=0.67 full=0
+  tau_hash_rich(P7)                E=0.00 E2=0.00 R2=0 I=1 acc=0.33 full=0
+  memoizer_gaming(P7)              E=0.00 E2=0.00 R2=0 I=1 acc=1.00 full=0
+
+分量消融（每配置误通过主体：定义上不应通过者通过）:
+  E_only  : 误通过 5 类 -> ['constant_q0(P6)', 'memoizer_gaming(P7)', 'order_sensitive_equivariant(P7)', 'tau_hash_rich(P7)', 'tau_keyed(P6)']
+  E_R2    : 误通过 1 类 -> ['order_sensitive_equivariant(P7)']
+  E_I     : 误通过 4 类 -> ['constant_q0(P6)', 'memoizer_gaming(P7)', 'tau_hash_rich(P7)', 'tau_keyed(P6)']
+  R2_I    : 误通过 2 类 -> ['anti_equivariant(P6)', 'wrong_map(P6)']
+  full    : 误通过 0 类 -> []
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p7/D6V3_RESULTS.csv
