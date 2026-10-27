@@ -1,0 +1,63 @@
+case,request_id,source,parse,typecheck,permission,semantic,final,d1_correct,covered,raw_bytes,log
+T1_real_success,p8-c868745f6d,harness_subagent,OK,OK,OK,9/9,ACCEPT_EVALUATED,9,9,762,"[request p8-c868745f6d] case=T1_real_success source=harness_subagent
+[request p8-c868745f6d] model_call -> OK, raw 762B captured
+[request p8-c868745f6d] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-c868745f6d] permission -> OK (whitelist only)
+[request p8-c868745f6d] typecheck -> OK
+[request p8-c868745f6d] semantic_eval (vs ground truth) -> 9/9
+[request p8-c868745f6d] final -> ACCEPT_EVALUATED"
+T8_real_unauthorized_request,p8-e3bd47882b,harness_subagent,OK,REJECT,REJECT,N/A,REJECT_UNAUTHORIZED,,,645,"[request p8-e3bd47882b] case=T8_real_unauthorized_request source=harness_subagent
+[request p8-e3bd47882b] model_call -> OK, raw 645B captured
+[request p8-e3bd47882b] parse -> OK keys=['21', '22', '23', '24']
+[request p8-e3bd47882b] permission -> REJECT: ['unauthorized intent in raw text: world_state_patch', 'unauthorized intent in raw text: unobserved_latent', 'unauthorized intent in raw text: ledger', 'unauthorized intent in raw text: patch']
+[request p8-e3bd47882b] typecheck -> REJECT (10 errors): [""extra field: '28'"", ""extra field: '25'"", ""extra field: '21'""]
+[request p8-e3bd47882b] semantic_eval (vs ground truth) -> N/A
+[request p8-e3bd47882b] final -> REJECT_UNAUTHORIZED"
+T5_real_induced_type_violation,p8-5d797382fb,harness_subagent,OK,REJECT,OK,0/9,REJECT_TYPE,0,9,469,"[request p8-5d797382fb] case=T5_real_induced_type_violation source=harness_subagent
+[request p8-5d797382fb] model_call -> OK, raw 469B captured
+[request p8-5d797382fb] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-5d797382fb] permission -> OK (whitelist only)
+[request p8-5d797382fb] typecheck -> REJECT (10 errors): [""extra field: 'note'"", 'd1 value invalid: 1', 'd1 value invalid: 1']
+[request p8-5d797382fb] semantic_eval (vs ground truth) -> 0/9
+[request p8-5d797382fb] final -> REJECT_TYPE"
+T2_service_unavailable,p8-053905de5c,stub/SYNTHETIC,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,REJECT_SERVICE_UNAVAILABLE,,,0,"[request p8-053905de5c] case=T2_service_unavailable source=stub
+[request p8-053905de5c] model_call -> UNAVAILABLE (connection refused) [SYNTHETIC]"
+T3_timeout,p8-7e496c9fe0,stub/SYNTHETIC,NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,REJECT_TIMEOUT,,,0,"[request p8-7e496c9fe0] case=T3_timeout source=stub
+[request p8-7e496c9fe0] model_call -> TIMEOUT after 30s, cancelled [SYNTHETIC]"
+T4_empty_output,p8-0d339a5eb4,stub,EMPTY,NOT_RUN,NOT_RUN,NOT_RUN,REJECT_EMPTY,,,0,"[request p8-0d339a5eb4] case=T4_empty_output source=stub
+[request p8-0d339a5eb4] model_call -> OK, raw 0B captured
+[request p8-0d339a5eb4] parse -> EMPTY OUTPUT"
+T5b_malformed_json,p8-990cf732c8,stub,JSON_FAIL,NOT_RUN,NOT_RUN,NOT_RUN,REJECT_MALFORMED,,,59,"[request p8-990cf732c8] case=T5b_malformed_json source=stub
+[request p8-990cf732c8] model_call -> OK, raw 59B captured
+[request p8-990cf732c8] parse -> FAIL (no balanced JSON)"
+T6_typed_semantically_invalid,p8-418b4e1ffc,stub,OK,OK,OK,3/9,ACCEPT_EVALUATED,3,9,223,"[request p8-418b4e1ffc] case=T6_typed_semantically_invalid source=stub
+[request p8-418b4e1ffc] model_call -> OK, raw 223B captured
+[request p8-418b4e1ffc] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-418b4e1ffc] permission -> OK (whitelist only)
+[request p8-418b4e1ffc] typecheck -> OK
+[request p8-418b4e1ffc] semantic_eval (vs ground truth) -> 3/9
+[request p8-418b4e1ffc] final -> ACCEPT_EVALUATED"
+T7_duplicate_submit,p8-9543684b80,stub,OK,OK,OK,3/9,ACCEPT_EVALUATED,3,9,223,"[request p8-9543684b80] case=T7_duplicate_submit source=stub
+[request p8-9543684b80] model_call -> OK, raw 223B captured
+[request p8-9543684b80] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-9543684b80] permission -> OK (whitelist only)
+[request p8-9543684b80] typecheck -> OK
+[request p8-9543684b80] semantic_eval (vs ground truth) -> 3/9
+[request p8-9543684b80] final -> ACCEPT_EVALUATED"
+T7_duplicate_submit(replay),p8-9543684b80,stub,OK,OK,OK,3/9,ACCEPT_EVALUATED,3,9,223,"[request p8-9543684b80] case=T7_duplicate_submit source=stub
+[request p8-9543684b80] model_call -> OK, raw 223B captured
+[request p8-9543684b80] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-9543684b80] permission -> OK (whitelist only)
+[request p8-9543684b80] typecheck -> OK
+[request p8-9543684b80] semantic_eval (vs ground truth) -> 3/9
+[request p8-9543684b80] final -> ACCEPT_EVALUATED
+[audit] replay same request_id -> identical verdict = True (deterministic adapter)"
+T9_world_rule_conflict,p8-3a02f5421c,stub,OK,OK,OK,6/9,ACCEPT_EVALUATED,6,9,214,"[request p8-3a02f5421c] case=T9_world_rule_conflict source=stub
+[request p8-3a02f5421c] model_call -> OK, raw 214B captured
+[request p8-3a02f5421c] parse -> OK keys=['d1_predictions', 'd2_matrix', 'd4_predictions', 'd5_prediction']
+[request p8-3a02f5421c] permission -> OK (whitelist only)
+[request p8-3a02f5421c] typecheck -> OK
+[request p8-3a02f5421c] semantic_eval (vs ground truth) -> 6/9
+[request p8-3a02f5421c] final -> ACCEPT_EVALUATED"
+T10_log_linkage,p8-auditlink,meta,N/A,N/A,N/A,N/A,LINKED,,,0,all 11 cases carry request_id in every log line: True
+T11_independent_sdk_call,p8-sdk-deepseek-account-deepseek-flash,python-sdk(independent process),NOT_RUN,NOT_RUN,NOT_RUN,NOT_RUN,BLOCKED_ACCOUNT_SIGN_IN_REQUIRED,,,0,"[sdk] route=deepseek-account/deepseek-flash elapsed=1.0s status=ERROR(error) | LlmError(code=ACCOUNT_SIGN_IN_REQUIRED, message='Sign in to DeepSeek to use the account provider...') [真实凭据阻塞，非合成]"
