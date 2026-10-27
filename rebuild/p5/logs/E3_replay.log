@@ -1,0 +1,16 @@
+== E3 重放负对照 ==
+
+  identical_rerun              契约=code+REPLAY_SPEC             预期=SUCCESS   实际exit=0 SUCCESS 判定=MATCH
+  seed_bitflip                 契约=code                         预期=REJECTED  实际exit=1 REJECTED: ValueError: Session 1 seed mismatch! Expected 1319 判定=MATCH
+  tamper_next_state            契约=code                         预期=REJECTED  实际exit=1 REJECTED: ValueError: Ledger mismatch in Session 1! 判定=MATCH
+  tamper_action_equivalent     契约=code(一致性非真实性)                预期=SUCCESS   实际exit=0 SUCCESS 判定=MATCH
+  tamper_action_outcome_changing 契约=code                         预期=REJECTED  实际exit=1 REJECTED: ValueError: Ledger mismatch in Session 1! 判定=MATCH
+  reorder_events               契约=code(顺序语义在账本内)               预期=REJECTED  实际exit=1 REJECTED: ValueError: Ledger mismatch in Session 1! 判定=MATCH
+  duplicate_event              契约=code                         预期=REJECTED  实际exit=1 REJECTED: ValueError: Ledger mismatch in Session 1! 判定=MATCH
+  drop_event                   契约=code                         预期=REJECTED  实际exit=1 REJECTED: ValueError: Ledger mismatch in Session 1! 判定=MATCH
+  corrupt_json_line            契约=UNRESOLVED(规格未定义)            预期=UNDEFINED 实际exit=1 REJECTED: json.decoder.JSONDecodeError: Expecting value: lin 判定=DOCUMENTED
+  session_relabel_consistent   契约=UNRESOLVED(内容-会话绑定规格未定义)     预期=SUCCESS   实际exit=0 SUCCESS 判定=MATCH
+  extra_record_fields          契约=code(审计范围=seed+ledger)       预期=SUCCESS   实际exit=0 SUCCESS 判定=MATCH
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p5/E3_REPLAY_RESULTS.csv
+tmp logs: /var/folders/cb/dx90h3g57qsc4fj38007t68c0000gn/T/p5e3_vh79u_dy

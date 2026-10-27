@@ -1,0 +1,20 @@
+attack,arm,attempts,successes,failure_type,record_complete,notes
+normal_control,engine_orig,1,0,ACCEPTED(expected),True,d1_pass=True
+normal_control,engine_check,1,0,ACCEPTED(expected),True,d1_pass=True
+normal_control,ablation_P0C0A1,1,0,ACCEPTED(expected),True,d1_pass=True
+A1_latent_exfiltration,engine_orig,21,0,INTERCEPTED_BY_PROJECTION,True,latent_observed=0/21
+A1_latent_exfiltration,engine_check,21,0,INTERCEPTED_BY_PROJECTION,True,latent_observed=0/21
+A1_latent_exfiltration,ablation_P0C0A1,21,1,BREACH,True,latent_observed=21/21
+A2_ledger_forgery,engine_orig,22,0,INTERCEPTED_BY_DEEPCOPY,True,breaches=0
+A2_ledger_forgery,engine_check,22,0,INTERCEPTED_BY_DEEPCOPY,True,breaches=0
+A2_ledger_forgery,ablation_P0C0A1,22,1,BREACH,True,breaches=1
+A3_format_confusion,engine_orig,1,1,DOS_CRASH,False,AttributeError: 'int' object has no attribute 'get'
+A3_format_confusion,engine_check,1,0,REJECTED_BY_PARSE_GUARD,True,pf=2 any_pass=False
+A3_format_confusion,ablation_P0C0A1,1,1,DOS_CRASH(evaluator assumes dict),False,AttributeError: 'int' object has no attribute 'get'
+A4_state_write_injection,engine_orig,21,0,NO_CHANNEL(引擎不读取额外字段),True,world 内部状态未被篡改；额外字段被忽略
+A4_state_write_injection,engine_check,21,0,NO_CHANNEL(引擎不读取额外字段),True,world 内部状态未被篡改；额外字段被忽略
+A4_state_write_injection,ablation_P0C0A1,21,0,NO_CHANNEL,True,unexpected_state=0/21
+A5a_d6_constant_spoof,engine_orig,1,1,METRIC_BLIND_SPOT(恒定输出即得 d6=0),True,d6_div=0.0
+A5a_d6_constant_spoof,engine_check,1,1,METRIC_BLIND_SPOT(恒定输出即得 d6=0),True,d6_div=0.0
+A5b_public_private_mix,engine_orig,1,0,NO_CHANNEL(Phase II 无混合通道),True,d5_acc=0.0（提交账本首状态被判错，无验证混淆）
+A5b_public_private_mix,engine_check,1,0,NO_CHANNEL(Phase II 无混合通道),True,d5_acc=0.0（提交账本首状态被判错，无验证混淆）

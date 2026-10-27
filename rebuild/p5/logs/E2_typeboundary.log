@@ -1,0 +1,52 @@
+== E2 类型边界三臂矩阵 ==
+
+  A_orig   valid_oracle                 crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  valid_oracle                 crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_twin   valid_oracle                 crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   none                         crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_check  none                         crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   none                         crash=AttributeError: 'NoneType' object has no pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   str                          crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_check  str                          crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   str                          crash=AttributeError: 'str' object has no attr pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   raise                        crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_check  raise                        crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   raise                        crash=RuntimeError: LLM crash                  pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   list                         crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_check  list                         crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   list                         crash=AttributeError: 'list' object has no att pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   d1_predictions_int           crash=AttributeError: 'int' object has no attr pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_check  d1_predictions_int           crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d1_predictions_int           crash=AttributeError: 'int' object has no attr pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   d2_matrix_str                crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d2_matrix_str                crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d2_matrix_str                crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   d2_nested_int                crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d2_nested_int                crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d2_nested_int                crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   empty_dict                   crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  empty_dict                   crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   empty_dict                   crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   extra_fields                 crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  extra_fields                 crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   extra_fields                 crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   d5_empty_string              crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d5_empty_string              crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d5_empty_string              crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   d5_illegal_enum              crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d5_illegal_enum              crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d5_illegal_enum              crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   d5_long_input                crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d5_long_input                crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d5_long_input                crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   multi_field_malformed        crash=AttributeError: 'int' object has no attr pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_check  multi_field_malformed        crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   multi_field_malformed        crash=AttributeError: 'int' object has no attr pf=N/A  complete=False invalid_accepted=N/A-crash
+  A_orig   d1_int_keys                  crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  d1_int_keys                  crash=NO                                       pf=2    complete=True invalid_accepted=False
+  A_twin   d1_int_keys                  crash=NO                                       pf=0    complete=False invalid_accepted=False
+  A_orig   welltyped_semantically_invalid crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_check  welltyped_semantically_invalid crash=NO                                       pf=0    complete=True invalid_accepted=False
+  A_twin   welltyped_semantically_invalid crash=NO                                       pf=0    complete=False invalid_accepted=False
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p5/E2_TYPE_BOUNDARY_MATRIX.csv rows=48

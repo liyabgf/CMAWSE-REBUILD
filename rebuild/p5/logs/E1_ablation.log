@@ -1,0 +1,22 @@
+== E1 全因子消融 (2^3=8 配置 × 2 主体) ==
+
+配置记法 P=projection C=deepcopy A=audit；主体 probe=对抗探针 oracle=正常对照
+
+[P1C1A1] probe: latent=0/21 变异=0/22(INTERCEPTED_BY_DEEPCOPY) 记录完整=True 非预期状态=0/21
+[P1C1A1] oracle: d1_pass=True 记录完整=True (误拒检查)
+[P1C1A0] probe: latent=0/21 变异=0/22(INTERCEPTED_BY_DEEPCOPY) 记录完整=False 非预期状态=0/21
+[P1C1A0] oracle: d1_pass=False 记录完整=False (误拒检查)
+[P1C0A1] probe: latent=0/21 变异=1/22(BREACH) 记录完整=True 非预期状态=0/21
+[P1C0A1] oracle: d1_pass=True 记录完整=True (误拒检查)
+[P1C0A0] probe: latent=0/21 变异=0/22(NOT_TRIGGERED_NO_CHANNEL(ledger empty)) 记录完整=False 非预期状态=0/21
+[P1C0A0] oracle: d1_pass=False 记录完整=False (误拒检查)
+[P0C1A1] probe: latent=21/21 变异=0/22(INTERCEPTED_BY_DEEPCOPY) 记录完整=True 非预期状态=0/21
+[P0C1A1] oracle: d1_pass=True 记录完整=True (误拒检查)
+[P0C1A0] probe: latent=21/21 变异=0/22(INTERCEPTED_BY_DEEPCOPY) 记录完整=False 非预期状态=0/21
+[P0C1A0] oracle: d1_pass=False 记录完整=False (误拒检查)
+[P0C0A1] probe: latent=21/21 变异=1/22(BREACH) 记录完整=True 非预期状态=0/21
+[P0C0A1] oracle: d1_pass=True 记录完整=True (误拒检查)
+[P0C0A0] probe: latent=21/21 变异=0/22(NOT_TRIGGERED_NO_CHANNEL(ledger empty)) 记录完整=False 非预期状态=0/21
+[P0C0A0] oracle: d1_pass=False 记录完整=False (误拒检查)
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p5/E1_ABLATION_MATRIX.csv  rows=16

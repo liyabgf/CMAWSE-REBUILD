@@ -1,0 +1,17 @@
+config,projection,deepcopy,audit,agent,latent_exposure,latent_exposure_rate,mutation_attempts,mutation_breaches,mutation_outcome,record_complete,ledger_len,unexpected_state_changes,d1_pass
+P1C1A1,1,1,1,probe,0/21,0.0,22,0,INTERCEPTED_BY_DEEPCOPY,True,21,0,False
+P1C1A1,1,1,1,oracle,0/21,0.0,0,0,n/a,True,21,0,True
+P1C1A0,1,1,0,probe,0/21,0.0,22,0,INTERCEPTED_BY_DEEPCOPY,False,0,0,False
+P1C1A0,1,1,0,oracle,0/21,0.0,0,0,n/a,False,0,0,False
+P1C0A1,1,0,1,probe,0/21,0.0,22,1,BREACH,True,21,0,False
+P1C0A1,1,0,1,oracle,0/21,0.0,0,0,n/a,True,21,0,True
+P1C0A0,1,0,0,probe,0/21,0.0,22,0,NOT_TRIGGERED_NO_CHANNEL(ledger empty),False,0,0,False
+P1C0A0,1,0,0,oracle,0/21,0.0,0,0,n/a,False,0,0,False
+P0C1A1,0,1,1,probe,21/21,1.0,22,0,INTERCEPTED_BY_DEEPCOPY,True,21,0,False
+P0C1A1,0,1,1,oracle,0/21,0.0,0,0,n/a,True,21,0,True
+P0C1A0,0,1,0,probe,21/21,1.0,22,0,INTERCEPTED_BY_DEEPCOPY,False,0,0,False
+P0C1A0,0,1,0,oracle,0/21,0.0,0,0,n/a,False,0,0,False
+P0C0A1,0,0,1,probe,21/21,1.0,22,1,BREACH,True,21,0,False
+P0C0A1,0,0,1,oracle,0/21,0.0,0,0,n/a,True,21,0,True
+P0C0A0,0,0,0,probe,21/21,1.0,22,0,NOT_TRIGGERED_NO_CHANNEL(ledger empty),False,0,0,False
+P0C0A0,0,0,0,oracle,0/21,0.0,0,0,n/a,False,0,0,False

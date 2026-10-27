@@ -1,0 +1,49 @@
+case,arm,crash,parse_failures,record_complete,continued,invalid_accepted,boundary,rejection_traceable,rejection_reasons
+valid_oracle,A_orig,NO,0,True,True,False,ACCEPTED_VALID,False,
+valid_oracle,A_check,NO,0,True,True,False,ACCEPTED_VALID,False,
+valid_oracle,A_twin,NO,0,False,True,False,ACCEPTED_VALID,False,
+none,A_orig,NO,2,True,True,False,PARSE_GUARD_REJECTED,False,
+none,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"batch response: expected dict, got NoneType | batch response: expected dict, got NoneType"
+none,A_twin,AttributeError: 'NoneType' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+str,A_orig,NO,2,True,True,False,PARSE_GUARD_REJECTED,False,
+str,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"batch response: expected dict, got str | batch response: expected dict, got str"
+str,A_twin,AttributeError: 'str' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+raise,A_orig,NO,2,True,True,False,PARSE_GUARD_REJECTED,False,
+raise,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,False,
+raise,A_twin,RuntimeError: LLM crash,N/A,False,False,N/A-crash,CRASH,False,
+list,A_orig,NO,2,True,True,False,PARSE_GUARD_REJECTED,False,
+list,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"batch response: expected dict, got list | batch response: expected dict, got list"
+list,A_twin,AttributeError: 'list' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+d1_predictions_int,A_orig,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+d1_predictions_int,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d1_predictions: expected dict, got int | d1_predictions: expected dict, got int"
+d1_predictions_int,A_twin,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+d2_matrix_str,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d2_matrix_str,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d2_matrix: expected dict, got str | d2_matrix: expected dict, got str"
+d2_matrix_str,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d2_nested_int,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d2_nested_int,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d2_matrix[M1][act_alpha]: expected non-empty str<=256, got int | d2_matrix[M1][act_alpha]: expected non-empty str<=256, got int"
+d2_nested_int,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+empty_dict,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+empty_dict,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,d5_prediction: value not in closed state vocab: 'INVALID' | d5_prediction: value not in closed state vocab: 'INVALID'
+empty_dict,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+extra_fields,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+extra_fields,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,d5_prediction: value not in closed state vocab: 'INVALID' | d5_prediction: value not in closed state vocab: 'INVALID'
+extra_fields,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_empty_string,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_empty_string,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d5_prediction: expected non-empty str<=256, got str | d5_prediction: expected non-empty str<=256, got str"
+d5_empty_string,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_illegal_enum,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_illegal_enum,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,d5_prediction: value not in closed state vocab: 'HACK_STATE' | d5_prediction: value not in closed state vocab: 'HACK_STATE'
+d5_illegal_enum,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_long_input,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d5_long_input,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d5_prediction: expected non-empty str<=256, got str | d5_prediction: expected non-empty str<=256, got str"
+d5_long_input,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+multi_field_malformed,A_orig,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+multi_field_malformed,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"d1_predictions: expected dict, got int | d1_predictions: expected dict, got int"
+multi_field_malformed,A_twin,AttributeError: 'int' object has no attribute 'get',N/A,False,False,N/A-crash,CRASH,False,
+d1_int_keys,A_orig,NO,0,True,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+d1_int_keys,A_check,NO,2,True,True,False,PARSE_GUARD_REJECTED,True,"batch response key: expected str, got int | batch response key: expected str, got int"
+d1_int_keys,A_twin,NO,0,False,True,False,EVALUATOR_LOCAL_GUARD_SILENT,False,
+welltyped_semantically_invalid,A_orig,NO,0,True,True,False,ACCEPTED_VALID,False,
+welltyped_semantically_invalid,A_check,NO,0,True,True,False,ACCEPTED_VALID,False,
+welltyped_semantically_invalid,A_twin,NO,0,False,True,False,ACCEPTED_VALID,False,

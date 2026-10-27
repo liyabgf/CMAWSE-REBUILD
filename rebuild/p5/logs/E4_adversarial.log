@@ -1,0 +1,23 @@
+== E4 对抗主体实验（脚本化探针，无 LLM，不外推普遍安全性） ==
+
+  normal_control             engine_orig        attempts=  1 成功=0 类型=ACCEPTED(expected)                     记录完整=True | d1_pass=True
+  normal_control             engine_check       attempts=  1 成功=0 类型=ACCEPTED(expected)                     记录完整=True | d1_pass=True
+  normal_control             ablation_P0C0A1    attempts=  1 成功=0 类型=ACCEPTED(expected)                     记录完整=True | d1_pass=True
+  A1_latent_exfiltration     engine_orig        attempts= 21 成功=0 类型=INTERCEPTED_BY_PROJECTION              记录完整=True | latent_observed=0/21
+  A1_latent_exfiltration     engine_check       attempts= 21 成功=0 类型=INTERCEPTED_BY_PROJECTION              记录完整=True | latent_observed=0/21
+  A1_latent_exfiltration     ablation_P0C0A1    attempts= 21 成功=1 类型=BREACH                                 记录完整=True | latent_observed=21/21
+  A2_ledger_forgery          engine_orig        attempts= 22 成功=0 类型=INTERCEPTED_BY_DEEPCOPY                记录完整=True | breaches=0
+  A2_ledger_forgery          engine_check       attempts= 22 成功=0 类型=INTERCEPTED_BY_DEEPCOPY                记录完整=True | breaches=0
+  A2_ledger_forgery          ablation_P0C0A1    attempts= 22 成功=1 类型=BREACH                                 记录完整=True | breaches=1
+  A3_format_confusion        engine_orig        attempts=  1 成功=1 类型=DOS_CRASH                              记录完整=False | AttributeError: 'int' object has no attribute 'get'
+  A3_format_confusion        engine_check       attempts=  1 成功=0 类型=REJECTED_BY_PARSE_GUARD                记录完整=True | pf=2 any_pass=False
+  A3_format_confusion        ablation_P0C0A1    attempts=  1 成功=1 类型=DOS_CRASH(evaluator assumes dict)      记录完整=False | AttributeError: 'int' object has no attribute 'get'
+  A4_state_write_injection   engine_orig        attempts= 21 成功=0 类型=NO_CHANNEL(引擎不读取额外字段)                  记录完整=True | world 内部状态未被篡改；额外字段被忽略
+  A4_state_write_injection   engine_check       attempts= 21 成功=0 类型=NO_CHANNEL(引擎不读取额外字段)                  记录完整=True | world 内部状态未被篡改；额外字段被忽略
+  A4_state_write_injection   ablation_P0C0A1    attempts= 21 成功=0 类型=NO_CHANNEL                             记录完整=True | unexpected_state=0/21
+  A5a_d6_constant_spoof      engine_orig        attempts=  1 成功=1 类型=METRIC_BLIND_SPOT(恒定输出即得 d6=0)         记录完整=True | d6_div=0.0
+  A5a_d6_constant_spoof      engine_check       attempts=  1 成功=1 类型=METRIC_BLIND_SPOT(恒定输出即得 d6=0)         记录完整=True | d6_div=0.0
+  A5b_public_private_mix     engine_orig        attempts=  1 成功=0 类型=NO_CHANNEL(Phase II 无混合通道)             记录完整=True | d5_acc=0.0（提交账本首状态被判错，无验证混淆）
+  A5b_public_private_mix     engine_check       attempts=  1 成功=0 类型=NO_CHANNEL(Phase II 无混合通道)             记录完整=True | d5_acc=0.0（提交账本首状态被判错，无验证混淆）
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p5/E4_ADVERSARIAL_RESULTS.csv

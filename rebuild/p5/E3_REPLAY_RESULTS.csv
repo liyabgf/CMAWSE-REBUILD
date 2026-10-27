@@ -1,0 +1,12 @@
+scenario,contract_source,expected,actual_exit,actual_result,verdict
+identical_rerun,code+REPLAY_SPEC,SUCCESS,0,SUCCESS,MATCH
+seed_bitflip,code,REJECTED,1,"REJECTED: ValueError: Session 1 seed mismatch! Expected 13196798955893174171, go",MATCH
+tamper_next_state,code,REJECTED,1,REJECTED: ValueError: Ledger mismatch in Session 1!,MATCH
+tamper_action_equivalent,code(一致性非真实性),SUCCESS,0,SUCCESS,MATCH
+tamper_action_outcome_changing,code,REJECTED,1,REJECTED: ValueError: Ledger mismatch in Session 1!,MATCH
+reorder_events,code(顺序语义在账本内),REJECTED,1,REJECTED: ValueError: Ledger mismatch in Session 1!,MATCH
+duplicate_event,code,REJECTED,1,REJECTED: ValueError: Ledger mismatch in Session 1!,MATCH
+drop_event,code,REJECTED,1,REJECTED: ValueError: Ledger mismatch in Session 1!,MATCH
+corrupt_json_line,UNRESOLVED(规格未定义),UNDEFINED,1,REJECTED: json.decoder.JSONDecodeError: Expecting value: line 2 column 1 (char 3,DOCUMENTED
+session_relabel_consistent,UNRESOLVED(内容-会话绑定规格未定义),SUCCESS,0,SUCCESS,MATCH
+extra_record_fields,code(审计范围=seed+ledger),SUCCESS,0,SUCCESS,MATCH
