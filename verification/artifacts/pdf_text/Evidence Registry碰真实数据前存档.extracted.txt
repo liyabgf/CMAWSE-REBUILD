@@ -1,0 +1,214 @@
+CMAWSE Evidence Registry Validator Phase 2: Adversarial Fixtures 实施报告 
+1. 新增/修改
+⽂
+件 
+  - 新增 tests/test_registry_adversarial_
+ﬁ
+xtures.py 
+      - 独
+⽴
+建
+⽴
+对抗性测试套件，包含 12 
+⼤
+攻击类别下的恶意构造样例与基准合法样例。 
+  - 未修改 src/cmawse/registry/models.py（保持基线不变） 
+  - 未修改 src/cmawse/registry/validator.py（严格遵循只读原则，不为迎合测试改动裁判逻辑） 
+  - 未修改 CMAWSE_EVIDENCE_REGISTRY_SCHEMA_v0.1.md 
+2. 对抗性测试样例（Adversarial Fixtures）数量统计 
+  - 总 Fixture 数量：31 个 
+      - 覆盖全部 12 类对抗攻击
+⾯
+，每个攻击类别均包含边界与极值构造。 
+3. PASS Fixture 数量 
+  - 合法通过
+⽤
+例：7 个（要求 \ge 5） 
+      - 
+ﬁ
+xture_pass_01_unit_level_standard: 标准单样本证据链（全层级完整引
+⽤
+） 
+      - 
+ﬁ
+xture_pass_02_aggregate_multi_sample: 标准聚合证据（如 35/35、8/8 闭合样本对
+账） 
+      - 
+ﬁ
+xture_pass_03_statistical_record_single_exp: 单
+⼀
+实验内合法统计推断 
+      - 
+ﬁ
+xture_pass_04_justi
+ﬁ
+ed_local_claim: 具备双向可信证据
+⽀
+持的具象 Claim 
+      - 
+ﬁ
+xture_pass_05_multi_claim_coherent_summary: 汇聚多条合法 Claim 的全局 Summary 
+      - 
+ﬁ
+xture_pass_06_matrix_result_container: 严格符合
+⾏
+列维度的转移矩阵容器 
+      - 
+ﬁ
+xture_pass_07_general_claim_explicit_blocked: 显式标注 BLOCKED 状态的宽泛主张正
+常登记 
+4. EXPECTED-FAIL Fixture 数量 
+  - 预期拦截
+⽤
+例：24 个（每类
+⾄
+少 1~3 个专项变体，全部经 Validator 实际断
+⾔
+拦截并触发失
+败）： 
+    1.  UNIT_LEVEL 粒度伪装（3 个 FAIL）：0 个 SampleUnit、2 个 SampleUnit、使
+⽤
+ 
+Aggregate 
+        结构标记为 UNIT_LEVEL。 
+    2.  AGGREGATE 分
+⺟
+攻击（3 个 FAIL）：声明分
+⺟
+⼤
+于实际样本集、声明分
+⺟
+⼩
+于实际样本
+集、SampleUnit 列表包含重复 ID 
+        虚报基数。 
+    3.  Experiment 越界（2 个 FAIL）：同
+⼀
+统计记录同时汇聚 Experiment A 与 Experiment B 的
+证据条
+⽬
+。 
+    4.  跨实验数字拼接（1 个 FAIL）：将 MW-0.3.1 (16/30) 与 MW-0.7 (33/64) 混编
+⼊
+同
+⼀
+单实
+验统计输
+⼊
+。 
+    5.  悬挂引
+⽤
+（4 个 FAIL）：Evidence 缺失 SampleUnit、Trial 缺失 
+        Condition、StatisticalRecord 引
+⽤
+不存在的 Evidence、Claim 引
+⽤
+未登记的 Statistic。 
+
+    6.  DAG 循环依赖攻击（2 个 FAIL）：Claim A 与 Claim B 相互引
+⽤
+构成的直接环；Summary 
+\to Claim \to 
+        Evidence \to Summary 的闭合环。 
+    7.  下游凭空创造事实（2 个 FAIL）：
+⽆
+上游 Evidence 
+⽀
+持的裸 Claim；仅在 Summary 
+⽂
+本
+中凭空声明未登记的分
+⼦
+分
+⺟
+⽐
+率。 
+    8.  GENERAL_SCIENTIFIC_CLAIM 
+⻔
+禁（1 个 FAIL）：合法结构但试图激活为 VERIFIED 或 
+ACTIVE 
+        的宏观假说被刚性阻断。 
+    9.  DERIVED_REPORT 溯源伪装（1 个 FAIL）：产物类型为 DERIVED_REPORT 但强
+⾏
+声明为 
+        DIRECTLY_TRACEABLE。 
+    10. Scope 跨实验
+⾃
+动合并污染（2 个 FAIL）：两组不同 Experiment 但 N=30 且 metric 
+        完全相同的记录，尝试
+⾃
+动合并时被实验主权阻断。 
+    11. ResultContainer 边界错误（2 个 FAIL）：标量分
+⺟
+为 0 且未置标记；矩阵定义的
+⾏
+列数与
+嵌套数组实际
+⻓
+度不
+⼀
+致。 
+    12. Status 越权绕过（1 个 FAIL）：条
+⽬
+结构缺少上游物理引
+⽤
+，但试图通过标设 
+Veri
+ﬁ
+cationStatus.VERIFIED 
+        强
+⾏
+合法化。 
+5. 是否发现 Validator 漏洞 
+  - 未发现漏报性安全漏洞：所有构造的 24 项越界、伪装、数字混淆与循环依赖均被 Validator 准
+确拦截（Fail-Closed）。 
+  - 发现
+⼀
+处实现细节健壮性建议：在处理畸变矩阵（Matrix Container）时，若嵌套列表中存在
+⾮
+均
+⻓
+⾏
+，错误信息直接抛出低层级 
+    IndexError，未来可在
+⼊
+⼝
+处显式收敛为统
+⼀
+的 ContainerShapeMismatchError。 
+6. 是否发现 Schema/Validator 冲突 
+  - 
+⽆
+冲突。 
+  - 规则“DERIVED_REPORT 不得仅凭其
+⾃
+身
+⾃
+动取得 DIRECTLY_TRACEABLE”与
+“GENERAL_SCIENTIFIC_CLAIM 
+    必须保持 BLOCKED”在 Validator 与 Schema 之间保持完全语义对称。 
+  - 聚合分
+⺟
+严格对账（Denominator == Unique Sample Count）完全符合 Schema v0.1 对 
+    16/30, 33/64, 11/30 的表述规范，
+⽆
+任何隐式语义漂移。 
+7. 当前是否可以进
+⼊
+真实 Registry prototype validation 
+可以进
+⼊
+。 
+所有对抗攻击测试与正向不变量测试全部通过，系统在
+⾯
+对恶意篡改、分
+⺟
+混淆、伪造溯源以及循
+环引
+⽤
+时具备完全的刚性防御能
+⼒
+，具备验证真实实验记录注册原型（Registry 
+Prototype）的技术准
+⼊
+条件。 

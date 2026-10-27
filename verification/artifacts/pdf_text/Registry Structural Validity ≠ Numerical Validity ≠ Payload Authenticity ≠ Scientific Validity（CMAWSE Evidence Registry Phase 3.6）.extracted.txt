@@ -1,0 +1,258 @@
+CMAWSE Evidence Registry Phase 3.6: 语义与数值完整性审计报告 (SEMANTIC / NUMERICAL 
+INTEGRITY AUDIT) 
+⼀
+、Duplicate SampleUnit ID Attack 取证 
+1.  当前 Validator 是否拒绝重复 sample_unit_id？ 
+      - 否。models.py 将 sample_unit_ids 定义为 List[str]，未配置 @
+ﬁ
+eld_validator 
+        检查列表唯
+⼀
+性（
+⽆
+ len(v) == len(set(v)) 约束）。 
+2.  如果 denominator == len(set(sample_unit_ids)) 是否可能错误通过？ 
+      - 是。若实现采
+⽤
+去重后的集合
+⻓
+度
+⽐
+对分
+⺟
+（len(set(sample_unit_ids)) == denominator），
+则输
+⼊
+ 
+        sample_unit_ids = ["SU-01", "SU-01"] 配合 denominator = 1 
+        将被放
+⾏
+通过；反之，若实现仅做直接列表
+⻓
+度
+⽐
+对（len(sample_unit_ids) == 
+denominator），则 
+        denominator = 2 会被放
+⾏
+。由于未对列表
+⾃
+身施加
+⽆
+重复约束，攻击者可以通过构造重复 
+ID 
+        绕过“独
+⽴
+样本单元数”与“分
+⺟
+”的真值对应。 
+3.  EvidenceGranularity=UNIT_LEVEL 时是否存在同样问题？ 
+      - 否。UNIT_LEVEL 显式断
+⾔
+ len(sample_unit_ids) == 1，天然免疫多项重复注
+⼊
+。 
+4.  AGGREGATE 时是否存在同样问题？ 
+      - 是。AGGREGATE 仅断
+⾔
+ len >= 1 及分
+⺟
+⼀
+致性，存在重复 ID 伪造样本容量的漏洞。 
+DUPLICATE_SAMPLE_ID: BYPASS_POSSIBLE 
+  - 证据定位：src/cmawse/registry/validator.py 中 _check_granularity_and_denominator() 
+    仅执
+⾏
+基数
+⽐
+对，缺失 set(ids) 与原始 ids 
+    等
+⻓
+性断
+⾔
+；tests/test_registry_adversarial_
+ﬁ
+xtures.py 
+    仅覆盖了显式声明不
+⼀
+致的情况，未覆盖重复 ID 伪装等
+⻓
+场景。 
+⼆
+、Statistic Value Forgery 取证 
+  - 测试
+⾏
+为：构建包含完全合法引
+⽤
+关系、合法枚举、合法物理上游，但 
+StatisticalRecord.value 从 0.52 被任意篡改为 0.91 
+    的记录。 
+  - Validator 实际反应： 
+      - Validator 仅执
+⾏
+ Pydantic 字段类型检查（
+ﬂ
+oat）与上游 input_evidence_ids 的外键存在性
+校验； 
+      - Validator 完全不包含任何统计学重算逻辑（不调
+⽤
+任何置换检验算
+⼦
+、不计算
+⼆
+项/正态/卡
+⽅
+分布），对篡改后的浮点数值
+⽆
+条件接受（B + C 
+        + D）。 
+STATISTIC_RECOMPUTATION: ABSENT 
+三、p-value / CI Forgery 取证 
+
+在保持 operator、input_evidence_ids、value 不变的前提下，直接将 p_value 从 0.859 篡改为 
+0.001，将 
+ci_95 随意缩放： 
+  - VALUE_INTEGRITY：NOT_ENFORCED（不校验数值是否源
+⾃
+输
+⼊
+ Evidence） 
+  - P_VALUE_INTEGRITY：NOT_ENFORCED（不重算显著性，仅检查 0.0 <= p <= 1.0） 
+  - CI_INTEGRITY：NOT_ENFORCED（不重算置信区间，仅检查 len(ci_95) == 2 且 ci[0] <= 
+ci[1]） 
+四、Artifact Payload Integrity 取证 
+检查 EvidenceRecord.artifact_ref： 
+1.  实际存在性检查：未执
+⾏
+（纯字符串引
+⽤
+，
+⽆
+⽂
+件系统 os.path.exists 探针）。 
+2.  
+⽬
+标指向检查：未执
+⾏
+。 
+3.  内容完整性检查：未执
+⾏
+。 
+4.  SHA-256 / 密码学哈希对账：未执
+⾏
+（Schema v0.1 的 EvidenceRecord 规范本身未定义 
+hash 字段）。 
+PAYLOAD_INTEGRITY: NOT_ENFORCED 
+五、Claim Semantic Integrity 取证 
+构造合法统计记录
+⽀
+撑
+⼀
+条严重泛化、范围
+⽆
+限扩
+⼤
+的主张（如由局部单变量不显著推演“证明所有
+⼤
+模型均
+⽆
+因果能
+⼒
+”）： 
+  - Validator 
+⾏
+为表现： 
+      - Validator 仅检查 ClaimRecord.claim_type 是否在 Schema v0.1 的 4 个枚举内； 
+      - 检查 supporting_evidence_ids / supporting_statistic_ids 是否存在； 
+      - 完全不解析 ClaimRecord.statement 的
+⾃
+然语
+⾔
+语义，
+⽆
+法阻
+⽌
+任何范围通胀、因果泛化或
+模型过度外推。 
+CLAIM_SEMANTIC_INTEGRITY: STRUCTURAL_ONLY 
+六、Downstream Claim Back-Reference Attack 取证 
+  - 检查事实： 
+      - Validator 的拓扑检查仅断
+⾔
+“有向
+⽆
+环（DAG）”与“被引
+⽤
+ ID 存在”； 
+      - 如果攻击者预先写定虚假结论 Claim，随后伪造
+⼀
+条数据格式完美闭合但纯属捏造的 
+StatisticalRecord，并将其挂接
+⾄
+合法的 
+        EvidenceRecord，整个链条将被 Validator 判定为完全合规。 
+      - Validator 仅能防范循环死锁与断裂悬挂，
+⽆
+法验证推导过程的认识论正当性。 
+七、最终分类汇总 
+
+ATTACK_01_DUPLICATE_SAMPLE_ID: BYPASS_POSSIBLE 
+ATTACK_02_STATISTIC_VALUE_FORGERY: BYPASS_POSSIBLE 
+ATTACK_03_P_VALUE_FORGERY: BYPASS_POSSIBLE 
+ATTACK_04_CI_FORGERY: BYPASS_POSSIBLE 
+ATTACK_05_ARTIFACT_PAYLOAD_FORGERY: OUT_OF_SCOPE 
+ATTACK_06_SCOPE_EXPANSION: BYPASS_POSSIBLE 
+ATTACK_07_DOWNSTREAM_CLAIM_BACKREFERENCE: BYPASS_POSSIBLE 
+CURRENT_VALIDATOR_SECURITY_LEVEL: STRUCTURAL_PLUS_PROVENANCE 
+(说明：当前系统实现了“数据结构类型约束 + 有向引
+⽤
+溯源图完整性”，但不具备数值重算、载荷指
+纹
+⽐
+对与语义真值鉴别能
+⼒
+。) 
+⼋
+、核
+⼼
+问题裁决 
+问：“当前 Evidence Registry Validator 究竟是在验证 A（Registry 结构是否合法）还是 B
+（Registry 
+中记录的科学事实本身是否真实）？” 
+答：严格且仅在验证 A（Registry 结构是否合法）。 
+法医级界限声明： 
+\text{STRUCTURAL VALIDATION} \neq \text{NUMERICAL RECOMPUTATION} \neq 
+\text{SOURCE PAYLOAD VERIFICATION} \neq \text{SCIENTIFIC TRUTH VALIDATION} 
+1.  结构合法 (Structural Validity)：代表 JSON/对象符合 Schema 契约，没有野指针、悬挂引
+⽤
+和
+环状拓扑。当前 
+    Validator 100% 具备此项能
+⼒
+。 
+2.  数值真实 (Numerical Truth)：需要独
+⽴
+统计求解器根据原始数据点重跑 Wilcoxon / 
+Bootstrap / Fisher 
+    精确检验。当前系统不具备该能
+⼒
+。 
+3.  载荷真实 (Payload Authenticity)：需要外部
+⽂
+件系统的不可变 SHA-256 哈希链签核。当前系
+统不具备该能
+⼒
+。 
+4.  科学事实真理性 (Scienti
+ﬁ
+c Truth)：需要排除过度概括、控制混淆变量与实验范式有效性，属于
+⼈
+类同
+⾏
+评审与
+⾼
+级因果论证范畴。任何
+⾃
+动化 
+    Registry Validator 均绝不可能仅凭结构校验替代科学事实真理性证明。 
+

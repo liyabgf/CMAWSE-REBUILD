@@ -1,0 +1,97 @@
+V2 独立复核：对话导出 python 代码块 compile 门禁
+
+CMAWSE第一阶段.md @L154 lines=223 elision=False OK
+CMAWSE第一阶段.md @L384 lines=83 elision=False OK
+CMAWSE第一阶段.md @L474 lines=186 elision=False OK
+CMAWSE第一阶段.md @L667 lines=274 elision=False OK
+CMAWSE第一阶段.md @L950 lines=209 elision=False OK
+CMAWSE第一阶段.md @L1253 lines=191 elision=False OK
+CMAWSE第一阶段.md @L1451 lines=75 elision=False OK
+CMAWSE第一阶段.md @L1533 lines=185 elision=False OK
+CMAWSE第一阶段.md @L1725 lines=282 elision=False OK
+CMAWSE第一阶段.md @L2016 lines=223 elision=False OK
+CMAWSE第一阶段.md @L2289 lines=125 elision=True OK
+CMAWSE第一阶段.md @L2422 lines=145 elision=True OK
+CMAWSE第一阶段.md @L2575 lines=92 elision=False OK
+CMAWSE第一阶段.md @L2671 lines=94 elision=False OK
+CMAWSE第一阶段.md @L2773 lines=188 elision=False OK
+CMAWSE第一阶段.md @L2970 lines=132 elision=False OK
+CMAWSE第一阶段.md @L3164 lines=4 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L3175 lines=2 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L3200 lines=155 elision=True OK
+CMAWSE第一阶段.md @L3364 lines=142 elision=True OK
+CMAWSE第一阶段.md @L3514 lines=95 elision=True OK
+CMAWSE第一阶段.md @L3613 lines=92 elision=True OK
+CMAWSE第一阶段.md @L3714 lines=176 elision=False OK
+CMAWSE第一阶段.md @L3899 lines=202 elision=False OK
+CMAWSE第一阶段.md @L4175 lines=206 elision=True OK
+CMAWSE第一阶段.md @L4388 lines=193 elision=True OK
+CMAWSE第一阶段.md @L4588 lines=191 elision=False OK
+CMAWSE第一阶段.md @L4788 lines=375 elision=False OK
+CMAWSE第一阶段.md @L5336 lines=136 elision=True OK
+CMAWSE第一阶段.md @L5476 lines=205 elision=False OK
+CMAWSE第一阶段.md @L7031 lines=12 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7051 lines=5 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7065 lines=3 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7635 lines=6 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7663 lines=4 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7688 lines=4 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7714 lines=1 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L7740 lines=5 elision=False OK
+CMAWSE第一阶段.md @L10362 lines=87 elision=False OK
+CMAWSE第一阶段.md @L10455 lines=108 elision=False OK
+CMAWSE第一阶段.md @L10569 lines=191 elision=False OK
+CMAWSE第一阶段.md @L10766 lines=92 elision=False OK
+CMAWSE第一阶段.md @L10864 lines=82 elision=False OK
+CMAWSE第一阶段.md @L10952 lines=130 elision=False OK
+CMAWSE第一阶段.md @L11088 lines=283 elision=False OK
+CMAWSE第一阶段.md @L12242 lines=14 elision=True SYNTAXFAIL:2:unexpected indent
+CMAWSE第一阶段.md @L12264 lines=12 elision=True SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L12284 lines=8 elision=True SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L12300 lines=4 elision=False SYNTAXFAIL:2:unexpected indent
+CMAWSE第一阶段.md @L12312 lines=2 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L12359 lines=3 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L12586 lines=6 elision=False SYNTAXFAIL:2:'return' outside function
+CMAWSE第一阶段.md @L13196 lines=3 elision=False SYNTAXFAIL:3:'return' outside function
+CMAWSE第一阶段.md @L13405 lines=113 elision=False OK
+CMAWSE第一阶段.md @L13531 lines=189 elision=False OK
+CMAWSE第一阶段.md @L13733 lines=89 elision=False OK
+CMAWSE第一阶段.md @L13833 lines=121 elision=False OK
+CMAWSE第一阶段.md @L13967 lines=290 elision=False OK
+CMAWSE第一阶段.md @L14375 lines=15 elision=True SYNTAXFAIL:4:'return' outside function
+CMAWSE第一阶段.md @L14463 lines=1 elision=False OK
+CMAWSE第一阶段.md @L14469 lines=1 elision=False OK
+CMAWSE第一阶段.md @L14491 lines=1 elision=False OK
+CMAWSE第一阶段.md @L14497 lines=7 elision=False SYNTAXFAIL:2:invalid character '→' (U+2192)
+CMAWSE第一阶段.md @L14578 lines=1 elision=False OK
+CMAWSE第一阶段.md @L14586 lines=1 elision=False OK
+CMAWSE第一阶段.md @L14632 lines=1 elision=False SYNTAXFAIL:1:invalid character '→' (U+2192)
+CMAWSE第一阶段.md @L14673 lines=2 elision=False OK
+CMAWSE第一阶段.md @L14716 lines=2 elision=False OK
+CMAWSE第一阶段.md @L14895 lines=4 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L14909 lines=11 elision=False OK
+CMAWSE第一阶段.md @L14941 lines=7 elision=False OK
+CMAWSE第一阶段.md @L14966 lines=2 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L14971 lines=4 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L14978 lines=1 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L15022 lines=6 elision=False OK
+CMAWSE第一阶段.md @L15333 lines=2 elision=False SYNTAXFAIL:2:'return' outside function
+CMAWSE第一阶段.md @L15340 lines=2 elision=False SYNTAXFAIL:2:'return' outside function
+CMAWSE第一阶段.md @L15425 lines=2 elision=False OK
+CMAWSE第一阶段.md @L15432 lines=5 elision=False OK
+CMAWSE第一阶段.md @L15506 lines=1 elision=False OK
+CMAWSE第一阶段.md @L15598 lines=1 elision=False OK
+CMAWSE第一阶段.md @L16769 lines=7 elision=False SYNTAXFAIL:1:unexpected indent
+CMAWSE第一阶段.md @L16883 lines=127 elision=False OK
+CMAWSE第一阶段.md @L17016 lines=180 elision=False OK
+CMAWSE第一阶段.md @L17202 lines=182 elision=False OK
+CMAWSE第一阶段.md @L17391 lines=151 elision=False SYNTAXFAIL:150:unterminated triple-quoted string litera
+CMAWSE第一阶段.md @L17641 lines=12 elision=True OK
+CMAWSE第一阶段.md @L17776 lines=191 elision=False OK
+CMAWSE第一阶段.md @L17973 lines=119 elision=False OK
+CMAWSE第一阶段.md @L18098 lines=174 elision=False OK
+CMAWSE第一阶段.md @L18297 lines=148 elision=False OK
+CMAWSE第一阶段.md @L18542 lines=277 elision=False OK
+CMAWSE第一阶段.md @L18825 lines=62 elision=False SYNTAXFAIL:63:unterminated string literal (detected at
+
+TOTAL: {"blocks": 93, "lines": 8458, "ok": 64, "fail": 29, "elision": 14}

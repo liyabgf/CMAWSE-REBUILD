@@ -1,0 +1,185 @@
+CMAWSE Evidence Registry Phase 3.7: 样本单元去重与分
+⺟
+完整性修复报告 (DUPLICATE 
+SAMPLE UNIT INTEGRITY REPAIR) 
+1. 修改
+⽂
+件 
+  - src/cmawse/registry/validator.py 
+      - 在 _check_granularity_and_denominator 
+⽅
+法中加
+⼊
+严格双重等价性约束，强制断
+⾔
+ 
+len(ids) == 
+        len(set(ids)) == denominator。 
+  - tests/test_registry_sample_unit_integrity.py (新增) 
+      - 建
+⽴
+专
+⻔
+的样本单元 ID 唯
+⼀
+性与分
+⺟
+对账攻击测试套件，全
+⾯
+覆盖 UNIT_LEVEL 与 
+AGGREGATE 在重复 ID 注
+⼊
+下的边界
+⾏
+为。 
+2. 修复前漏洞机制 
+  - 漏洞根因：原校验逻辑仅
+⽐
+对了集合去重后的基数与分
+⺟
+（len(set(ids)) == 
+    denominator），或者仅
+⽐
+对了原始数组
+⻓
+度（len(ids) == 
+    denominator）。 
+  - 绕过路径： 
+      - 若仅
+⽐
+对集合基数：攻击者构造 sample_unit_ids=["SU-01", "SU-01"] 并声明 
+        denominator=1，集合
+⻓
+度为 1 与分
+⺟
+相等，绕过校验； 
+      - 若仅
+⽐
+对数组
+⻓
+度：攻击者构造 sample_unit_ids=["SU-01", "SU-01"] 并声明 
+        denominator=2，数组
+⻓
+度为 2 与分
+⺟
+相等，使得只有 1 个独
+⽴
+物理样本的实验被虚报为 2 
+个样本。 
+3. 修复后约束 (The Tripartite Equality Invariant) 
+在 src/cmawse/registry/validator.py 中固化不可违背的刚性三元等式： 
+\operatorname{len}(\text{sample\_unit\_ids}) \equiv \operatorname{len}(\operatorname{set}
+(\text{sample\_unit\_ids})) \equiv \text{denominator} 
+具体执
+⾏
+断
+⾔
+： 
+1.  唯
+⼀
+性检查：len(record.sample_unit_ids) == 
+    len(set(record.sample_unit_ids))，若存在任何重复 ID，
+⽴
+即抛出 
+    DUPLICATE_SAMPLE_UNIT_ID 违例。 
+2.  分
+⺟
+严格对账：去重集合
+⻓
+度必须精确等于 record.result.denominator，否则抛出 
+    AGGREGATE_DENOMINATOR_MISMATCH 违例。 
+3.  UNIT_LEVEL 规则保持：强制要求 len(record.sample_unit_ids) == 1。 
+4. 新增攻击测试
+⽤
+例清单 
+在 tests/test_registry_sample_unit_integrity.py 中实现并验证： 
+
+1.  test_attack_duplicate_id_denominator_dedup: ids=["SU-01", "SU-01"], 
+    denominator=1 \implies FAIL (DUPLICATE_SAMPLE_UNIT_ID) 
+2.  test_attack_duplicate_id_denominator_raw_length: ids=["SU-01", "SU-01"], 
+    denominator=2 \implies FAIL (DUPLICATE_SAMPLE_UNIT_ID) 
+3.  test_attack_duplicate_id_mixed: ids=["SU-01", "SU-02", "SU-01"], 
+    denominator=3 \implies FAIL (DUPLICATE_SAMPLE_UNIT_ID) 
+4.  test_unit_level_duplicate_rejected: UNIT_LEVEL, ids=["SU-01", "SU-01"] 
+    \implies FAIL (UNIT_LEVEL_MUST_HAVE_EXACTLY_ONE_SAMPLE) 
+5.  test_aggregate_valid_cases_pass: ids=["SU-01"], denominator=1 \implies PASS； 
+    ids=["SU-01", "SU-02"], denominator=2 \implies PASS 
+6.  test_aggregate_mismatched_unique_ids_fail: ids=["SU-01", "SU-02"], 
+    denominator=1 \implies FAIL (AGGREGATE_DENOMINATOR_MISMATCH) 
+5. 全部测试结果统计与回归核对 
+  - BEFORE (Phase 3.3 规范恢复后基线)： 
+      - test_registry_validator.py: 18 passed 
+      - test_registry_adversarial_
+ﬁ
+xtures.py: 31 passed 
+      - test_schema_conformance.py: 11 passed 
+      - 总计：60 passed, 0 failed 
+  - AFTER (Phase 3.7 样本单元去重修复后)： 
+      - test_registry_validator.py: 18 passed 
+      - test_registry_adversarial_
+ﬁ
+xtures.py: 31 passed 
+      - test_schema_conformance.py: 11 passed 
+      - test_registry_sample_unit_integrity.py: 6 passed (新增) 
+      - 总计：66 passed in 0.46s (100% PASS) 
+  - REGRESSION 状态： 
+    REGRESSION: PASS 
+6. 是否仍存在 Duplicate SampleUnit ID Bypass 
+否 (BLOCKED)。 重复 ID 在原始列表
+⻓
+度与集合基数
+⽐
+对阶段即被拦截，
+⽆
+法再通过伪造分
+⺟
+或折
+叠列表绕过校验。 
+7. 当前 Validator 的准确职责声明 
+CMAWSE Evidence Registry Validator 当前被严格界定为只读的“结构规范与有向溯源关系图检验
+器（Structural & 
+Provenance Graph Checker）”。 
+
+它保证： 
+  - 所有输
+⼊
+对象符合 Schema v0.1 的 Pydantic 类型与封闭枚举定义； 
+  - 数据层级拓扑构成严格有向
+⽆
+环图（DAG），
+⽆
+断裂外键引
+⽤
+； 
+  - 样本单元
+⽆
+重复项且与统计分
+⺟
+精确
+⼀
+致； 
+  - 证据链具备单向因果
+⽅
+向（Experiment -> Condition -> Trial -> SampleUnit -> Evidence 
+-> 
+    Statistic -> Claim -> Summary）。 
+它明确不负责亦不具备： 
+  - 数值真实性重算（如根据原始数据点重跑统计检验）； 
+  - 外部物理载荷
+⽂
+件的
+⼀
+致性与哈希认证（Payload Authentication）； 
+  - 
+⾃
+然语
+⾔
+主张（Claim Statement）的科学真理性与泛化合理性判定。 
+8. 系统安全与能
+⼒
+判定矩阵 
+STRUCTURAL_INTEGRITY: COMPLETE 
+REFERENCE_PROVENANCE_INTEGRITY: COMPLETE 
+NUMERICAL_RECOMPUTATION: ABSENT 
+PAYLOAD_AUTHENTICATION: ABSENT 
+SCIENTIFIC_TRUTH_VALIDATION: ABSENT 

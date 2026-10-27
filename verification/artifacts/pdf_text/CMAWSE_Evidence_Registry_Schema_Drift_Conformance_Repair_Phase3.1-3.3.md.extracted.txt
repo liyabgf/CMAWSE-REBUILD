@@ -1,0 +1,166 @@
+[SEPARATE-ARCHIVE] 
+YES 
+[ARCHIVE-TYPE] 
+SCHEMA CONFORMANCE REPAIR 
+[CORE-FINDING] 
+Con
+ﬁ
+rmed implementation-induced Schema Drift was removed without modifying 
+Schema v0.1. 
+[REPAIR-SCOPE] 
+models.py / validator.py / tests only 
+[SCHEMA-MODIFIED] 
+NO 
+[DRIFT] 
+11 unauthorized enum values removed. 
+[CONFORMANCE-TEST] 
+11 explicit rejection tests added. 
+[RESULT] 
+60 passed 
+CONFORMANCE_RESTORED 
+[IMPORTANT-INTERPRETATION] 
+This restores implementation conformance. 
+It does NOT establish that the Registry Schema itself is scienti
+ﬁ
+cally complete, 
+nor does it validate the historical Registry prototypes. 
+[NEXT-BOUNDARY] 
+Historical prototype re-validation must occur after conformance restoration. 
+思考
+⾼
+层总结 
+为彻底清除实现层与测试层的规范漂移，对 models.py 与 validator.py 进
+⾏
+了严格收敛，彻底剔除
+了未在 
+CMAWSE_EVIDENCE_REGISTRY_SCHEMA_v0.1.md 中定义的全部 11 
+个
+⾮
+规范枚举值。同时重构了现有测试
+⽤
+例中的状态引
+⽤
+，统
+⼀
+对
+⻬
+⾄
+法定枚举（例如将误
+⽤
+的 
+PASSED 规范化为 VERIFIED），并针对全部 11 
+个漂移值增加了专属的反例拒绝测试，确保模型层在输
+⼊
+⾮
+法枚举时强制触发 ValidationError。 
+CMAWSE Evidence Registry Phase 3.3: 最
+⼩
+规范符合性修复报告 
+1. 修改
+⽂
+件 
+
+  - src/cmawse/registry/models.py 
+      - 彻底剔除 11 个
+⾮
+规范枚举值，使所有枚举定义严格封闭于 Schema v0.1 规范集合。 
+  - src/cmawse/registry/validator.py 
+      - 移除对
+⾮
+规范枚举的任何特殊分
+⽀
+处理与软性断
+⾔
+，杜绝别名转换与特权通过。 
+  - tests/test_registry_validator.py 
+      - 修复原有测试
+⽤
+例中对 Veri
+ﬁ
+cationStatus.PASSED 等
+⾮
+法枚举的调
+⽤
+，将其纠正为法定的 
+        Veri
+ﬁ
+cationStatus.VERIFIED。 
+  - tests/test_registry_adversarial_
+ﬁ
+xtures.py 
+      - 清理合法 
+ﬁ
+xture 中混
+⼊
+的
+⾮
+规范枚举，保持测试
+⽤
+例本身的语义纯洁性。 
+  - tests/test_schema_conformance.py（新增） 
+      - 专
+⻔
+针对 11 个已确认漂移值建
+⽴
+精准拒绝断
+⾔
+套件。 
+2. 删除的 Drift Enum 数量 
+共计删除 11 个 
+⾮
+规范枚举值： 
+  - EpistemicStatus (4个)：UNRESOLVED, FROZEN, SEALED, PROPOSED 
+  - ProvenanceStatus (3个)：CONTAMINATED, HISTORICAL_ARTIFACT, 
+    THEORETICAL_DERIVATION 
+  - Veri
+ﬁ
+cationStatus (1个)：PASSED 
+  - ArtifactType (1个)：DERIVED_REPORT 
+  - ClaimType (2个)：GENERAL_SCIENTIFIC_CLAIM, POSITIVE_CAUSAL_CAPABILITY 
+3. 新增 Conformance Tests 数量 
+  - 新增 11 项 独
+⽴
+精准断
+⾔
+⽤
+例（针对每
+⼀
+个具体漂移值单独测试 Pydantic 模型实例化拒绝，
+⽆
+⼀
+遗漏）： 
+    1.  test_reject_unresolved_epistemic_status 
+    2.  test_reject_frozen_epistemic_status 
+    3.  test_reject_sealed_epistemic_status 
+    4.  test_reject_proposed_epistemic_status 
+    5.  test_reject_contaminated_provenance_status 
+    6.  test_reject_historical_artifact_provenance_status 
+    7.  test_reject_theoretical_derivation_provenance_status 
+    8.  test_reject_passed_veri
+ﬁ
+cation_status 
+    9.  test_reject_derived_report_artifact_type 
+    10. test_reject_general_scienti
+ﬁ
+c_claim_type 
+    11. test_reject_positive_causal_capability_claim_type 
+4. Pytest 总结果 
+  - tests/test_registry_validator.py: 18 passed 
+  - tests/test_registry_adversarial_
+ﬁ
+xtures.py: 31 passed 
+  - tests/test_schema_conformance.py: 11 passed 
+
+  - 全量结果：60 passed in 0.42s (100% PASS) 
+5. 是否仍存在 Schema Drift 
+否。models.py 与 validator.py 中的全部枚举集合与 
+CMAWSE_EVIDENCE_REGISTRY_SCHEMA_v0.1.md 
+达成严格双射对
+⻬
+，
+⽆
+任何超额枚举或隐式别名。 
+6. 是否修改 Schema 
+否。未修改 CMAWSE_EVIDENCE_REGISTRY_SCHEMA_v0.1.md 任何字符。 
+最终判定 
+CONFORMANCE_RESTORED 

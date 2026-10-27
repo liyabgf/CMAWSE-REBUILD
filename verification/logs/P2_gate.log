@@ -1,0 +1,13 @@
+harness_v1_L59440.py: exit=0
+harness_v2_L59942.py: exit=0
+harness_v3_L60660.py: exit=1
+    Traceback (most recent call last):
+    ModuleNotFoundError: No module named 'CMAWSE_v1_0_3_EXPERIMENT_HARNESS'
+harness_v4_L60907.py: exit=0
+harness_v5_L61509.py: exit=1
+    Traceback (most recent call last):
+    ModuleNotFoundError: No module named 'CMAWSE_v1_0_3_EXPERIMENT_HARNESS'
+harness_v6_L61914.py: exit=0
+harness_v7_L62449.py: exit=1
+    Traceback (most recent call last):
+    ModuleNotFoundError: No module named 'CMAWSE_v1_0_3_EXPERIMENT_HARNESS'

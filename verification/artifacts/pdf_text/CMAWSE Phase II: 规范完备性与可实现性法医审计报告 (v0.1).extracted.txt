@@ -1,0 +1,651 @@
+CMAWSE Phase II: 规范完备性与可实现性法医审计报告 (v0.1) 
+⽂
+档编号：CMAWSE-PHASE2-NORMATIVE-COMPLETENESS-AUDIT-v0.1 
+审计基线：CMAWSE-SPEC-v1.0.3-FROZEN 
+真实环境代码编译与执
+⾏
+证据 (Actual Execution Log) 
+在开始理论与规范对账前，
+⾸
+先在当前
+⼯
+作区物理执
+⾏
+ Python 编译与已存在的测试套件，杜绝
+⽂
+本层
+⾯
+的假通过： 
+1. 字节码编译检验 
+$ python -m py_compile CMAWSE_v1_0_3_EXPERIMENT_HARNESS.py 
+$ python -m py_compile test_phase2_conformance.py 
+执
+⾏
+结果：Exit Code 0（语法正确，
+⽆
+直接导
+⼊
+异常）。 
+2. 单元与合成测试执
+⾏
+检验 
+$ python -m unittest -v test_phase2_conformance.py 
+真实终端输出记录： 
+test_canonical_replay_cli (__main__.TestPhaseIIConformance) ... ok 
+test_d0_architectural_isolation_and_interception (__main__.TestPhaseIIConformance) ... ok 
+test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance) ... ok 
+test_d2_evaluator_strictness (__main__.TestPhaseIIConformance) ... ok 
+test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance) ... ok 
+test_d5_hypothetical_branch (__main__.TestPhaseIIConformance) ... ok 
+test_d6_bijective_permutation_evaluator (__main__.TestPhaseIIConformance) ... ok 
+---------------------------------------------------------------------- 
+Ran 7 tests in 0.492s 
+OK 
+法医定性：上述测试通过仅证明“测试脚本
+⾃
+身通过了断
+⾔
+”，不代表规范具备完备性，亦不能作为
+实证就绪（Execution-Ready）的证明。以下进
+⼊
+严格的规范完备性审查。 
+核
+⼼
+审计产物：CMAWSE_PhaseII_NORMATIVE_COMPLETENESS_AUDIT_v0.1.md 
+A. 执
+⾏
+摘要与终审结论 (Executive Verdict) 
+========================================================================
+======== 
+
+                    CMAWSE Phase II Normative Verdict: 
+                            BLOCKED-BY-SPEC 
+========================================================================
+======== 
+核
+⼼
+阻断事实： 
+1.  参考算法族规范未闭合：检索
+⼯
+作区全部历史与冻结
+⽂
+档，H_{\text{mid-1}} (CART)、
+H_{\text{mid-4}} 
+    (FSM)、H_{\text{mid-5}} (kNN)、H_{\text{mid-6}} (Ensemble) 
+    仅有概念性
+⽅
+向描述，不存在任何可供第三
+⽅
+进
+⾏
+⽐
+特级
+⽆
+歧义实现的伪代码、分裂准则、平滑
+算法或停
+⽌
+条件。机制可识别性向量 
+    \mathbf{I} 在规范层处于阻断态。 
+2.  D4 因果有效性破产 (Causal Invalidity)：物理环境真实转移函数中，上下
+⽂
+变量 K 纯属
+⽆
+作
+⽤
+的旁路参数。D4 
+    在物理上仅测试了“不相关特征丢弃（Nuisance Invariance）”，未测试任何上下
+⽂
+敏感的因果机
+制迁移。 
+3.  统计管线与会话执
+⾏
+层解耦：D3 与 D6 的研究级推断依赖 N=100 会话聚合，但当前规范未定义
+聚合管线与单会话运
+⾏
+器之间的
+⾃
+动化管道调度协议。 
+B. v1.0.3 第三
+⽅
+可实现性矩阵 (Third-Party Implementability Matrix) 
+| 规范组件                      | 规范中是否存在唯
+⼀
+闭式      | 第三
+⽅
+能否
+⽆
+沟通实现 | 状态定性                  
+| 阻塞原因说明                               | 
+| :------------------------ | :--------------: | :--------: 
+| :-------------------: | :----------------------------------- | 
+| **PRNG 派
+⽣
+链**              | 是 (`SplitMix64`) | 是          | **IMPLEMENTABLE**     | 64 位移
+位异或算法确定。                        | 
+| **Layer A 状态机**           | 是                | 是          | **IMPLEMENTABLE**     | 离散状态数
+组与转移确定。                         | 
+| **Proj 视界投影**             | 是                | 是          | **IMPLEMENTABLE**     | 显式丢弃未
+观测参数 $u_t$。                     | 
+| **Hmid-2 (VersionSpace)** | 是 (锁定 333 基数)    | 是          | **IMPLEMENTABLE**     | 规
+则 AST 与优先级 $\min(\text{Canon})$ 闭合。 | 
+| **Hmid-3 (UCS AST)**      | 是 (锁定 1000 节点)   | 是          | **IMPLEMENTABLE**     | 
+UCS 节点遍历与
+⽂
+法产
+⽣
+式唯
+⼀
+。                    | 
+| **Hmid-1 (CART Tree)**    | **否**            | **否**      | **BLOCKED\_BY\_SPEC** | 缺失节
+点最优分割平局规则与剪枝公式。                   | 
+| **Hmid-4 (FSM N-gram)**   | **否**            | **否**      | **BLOCKED\_BY\_SPEC** | 缺失
+阶数历史滑动窗
+⼝
+与零频处理标准。                   | 
+| **Hmid-5 (k-NN Recency)** | **否**            | **否**      | **BLOCKED\_BY\_SPEC** | 缺失
+编辑距离度量与平局匹配权衡。                     | 
+| **Hmid-6 (Ensemble)**     | **否**            | **否**      | **BLOCKED\_BY\_SPEC** | 依赖前
+述未闭合模型。                           | 
+
+C. D0–D6 评测端点有效性矩阵 (Endpoint Validity Matrix) 
+| 维度     | 预注册
+⽬
+标        | 实际实现度量                                | 理论与代码是否
+⼀
+致         | 状
+态定性                   | 
+| :----: | :----------- | :------------------------------------ 
+| :---------------: | :--------------------: | 
+| **D0** | 运
+⾏
+时不变式与状态防篡改 | 
+⾮
+法 Action 标记驳回与只读隔离                   | 存在修辞
+夸
+⼤
+（
+⻅
+模块 H）     | **PARTIAL**            | 
+| **D1** | 离散规则时序前向拟合   | 测试集 9 步命中率差值 $\Delta_{\text{D1}}$     | 
+⼀
+致（批处
+理上下
+⽂
+冻结）      | **STATISTICAL-CLOSED** | 
+| **D2** | 多假说前向执
+⾏
+⼀
+致性   | 12 格矩阵
+⽐
+对 $\text{CR}_{\text{forward}}$ | 
+⼀
+致（仅限于
+玩具参考模型）     | **PARTIAL**            | 
+| **D3** | 
+⾹
+农信息增益优势量    | 会话级 $d_t$ 均值优势量                       | 算
+⼦
+⼀
+致，多会话
+调度未整合     | **STATISTICAL-CLOSED** | 
+| **D4** | 上下
+⽂
+结构因果泛化    | 替换为 $M$ 后的准确率                         | **完全不
+⼀
+致 (
+⻅
+模块 G)** | **ENDPOINT-INVALID**   | 
+| **D5** | 假设分
+⽀
+前向回溯推导   | $t=10$ 单步虚拟动作真值
+⽐
+对                     | 
+⼀
+致（独
+⽴
+ 
+Oracle 
+⽣
+成）  | **TESTED**             | 
+| **D6** | 跨符号置换策略不变性   | 单侧 Bootstrap Type 7 $Q_{0.99}$        | 算
+⼦
+⼀
+致，全场采
+样需
+⾃
+动化     | **STATISTICAL-CLOSED** | 
+D. D3 四层闭合审查 (D3 Four-Layer Closure Matrix) 
+[Layer 1: Mathematical Operator] ──────
+!
+ CLOSED  (d_t = IG(a_t) - mean IG) 
+[Layer 2: Bayesian Posterior Update] ───
+!
+ CLOSED  (Strict Zero-Likelihood Abort) 
+[Layer 3: Reference Hypotheses] ────────
+!
+ PARTIAL (依赖 M1/M2/M3，未泛化
+⾄
+通
+⽤
+空间) 
+[Layer 4: Cross-Session Aggregation] ───
+!
+ PARTIAL (算法已写出，未挂接单会话主循环) 
+1.  D3-A (Mathematical Operator)：CLOSED。 
+    IG(a; \pi_t) = H(\pi_t) - \sum_{y} P(y \mid a, \pi_t) H(\pi_{t+1}^y)，严格定义 
+    0 \log_2 0 \equiv 0。当最
+⼤
+增益为 0 时，d_t \equiv 0.0。数学定义唯
+⼀
+。 
+2.  D3-B (Session Aggregation)：PARTIAL。 单会话输出标量 
+    \Delta_{\text{D3}}^{(k)} = \frac{1}{T}\sum_{t=0}^{20} d_t 明确。但研究级需要 N=100 
+    个会话共同输
+⼊
+ evaluate_study_d3 产出最终 p 值，
+⽬
+前 Harness 仅
+⽀
+持单个会话运
+⾏
+，缺少
+多会话驱动调度器。 
+3.  D3-C (Reference Bayesian Update)：CLOSED。 严格移除了任何 lik 
+    fallback。当观测值在三模型下联合似然为 0 时，显式抛出 
+    ValueError("INVALID_REFERENCE_OUTCOME") 熔断 Session。 
+4.  D3-D (Reference Hypothesis Speci
+ﬁ
+cation)：PARTIAL。 微世界中仅硬编码了 3 
+    个特定假说。在
+⾯
+对开放动作时，参考假说未能由 DSL 
+⾃
+动派
+⽣
+，依赖实验者
+⼿
+⼯
+配置。 
+E. D6 分层闭合矩阵 (D6 Layered Closure Matrix) 
+
+| 闭合层级                 | 规范技术要求                                                                     | 当前代
+码实际达成状态                                         | 审定结论        | 
+| :------------------- 
+| :-----------------------------------------------------------------------
+-- | :------------------------------------------------- | :---------: | 
+| **1. 符号双射置换**        | 建
+⽴
+ $\mathcal{S}, \mathcal{X}, \mathcal{K}, \mathcal{A}$ 独
+⽴
+单
+射与逆映射           | `D6_BIJECTION_MAP` 与 `D6_INVERSE_MAP` 严格对称         | 
+**CLOSED**  | 
+| **2. 载荷深层重写**        | 递归重写输
+⼊
+，消除任何元标签                                                             
+| `_apply_bijective_permutation` 彻底重写所有嵌套字段          | **CLOSED**  | 
+| **3. 预测逆映射还原**       | 将置换预测还原到 Canonical 空间
+⽐
+对                                                    
+| `perm_d1_preds` 经由逆字典反查还原                          | **CLOSED**  | 
+| **4. 单会话汉明分歧**       | $D^{(k)} = \frac{1}{9}\sum \mathbb{I}(\hat{y} \neq \hat{y}
+_{\text{perm}})$ | 9 个测试点严格计算汉明不
+⼀
+致率                                   | **CLOSED**  | 
+| **5. 会话级 Bootstrap** | 以 Session 为独
+⽴
+采样单元重抽 $B=10^4$                                               
+| `evaluate_d6_bootstrap` 实现纯标准库
+⾮
+参数重抽                | **CLOSED**  | 
+| **6. Type 7 分位数闭式**  | $h = 1 + (B-1)p$，严格线性插值                                                    
+| 严格实现 $Q_{0.99} = x_{(j)} + g(x_{(j+1)} - x_{(j)})$ | **CLOSED**  | 
+| **7. 研究级
+⻔
+禁集成**       | 100 会话均值置信区间 $< 0.10$                                                      
+| 缺少收集 100 会话并
+⾃
+动调
+⽤
+的顶层脚本                              | **PARTIAL** | 
+F. H_{\text{mid-1 \dots 6}} 参考模型规范可
+⽤
+性矩阵 
+在检索当前
+⼯
+作区全部冻结
+⽂
+件后，参考模型的规范完备性定性如下： 
+| 模型代号                   | 理论模型类别                  | v1.0.3 规范中是否存在算法伪代码 | 是否锁定
+超参数与平局规则               | 状态定性                  | 
+| :--------------------: | :---------------------- | :-----------------: 
+| :------------------------: | :-------------------: | 
+| **$H_{\text{mid-1}}$** | 贪
+⼼
+条件决策树 (CART)          | 否（仅有
+⼀
+句话描述）          | 否（未
+定义相同基尼增益时的特征选取顺序）       | **BLOCKED\_BY\_SPEC** | 
+| **$H_{\text{mid-2}}$** | 版本空间消除器 (Version Space) | **是 (BLOCK-11 闭合)** | **是 (锁
+定 333 空间与字典序仲裁)**    | **CLOSED**            | 
+| **$H_{\text{mid-3}}$** | 符号程序合成器 (UCS AST)       | **是 (BLOCK-14 闭合)** | **是 (锁
+定 1000 节点展开与 EBNF)** | **CLOSED**            | 
+| **$H_{\text{mid-4}}$** | 
+⼆
+阶有限状态机 (FSM)           | 否                   | 否（未定义平滑超参
+数与状态转移矩阵初始分布）     | **BLOCKED\_BY\_SPEC** | 
+| **$H_{\text{mid-5}}$** | 局部启发式检索器 (k-NN)         | 否                   | 否（未定义离散符
+号编辑距离权重）           | **BLOCKED\_BY\_SPEC** | 
+| **$H_{\text{mid-6}}$** | 集成投票模型 (Ensemble)       | 否                   | 否（依赖 1/4/5 的闭
+合）            | **BLOCKED\_BY\_SPEC** | 
+裁决：第三
+⽅
+⼯
+程师仅凭 v1.0.3 绝对
+⽆
+法构建出
+⾏
+为
+⼀
+致的 
+H_{\text{mid-1}}, H_{\text{mid-4}}, H_{\text{mid-5}}, H_{\text{mid-6}}。任何私
+⾃
+补充实现的算
+法均属于未经授权的“
+⾃
+定义模型”。 
+
+G. D4 因果有效性法医解构 (D4 Causal Validity Analysis) 
+核验 CMAWSE_v1_0_3_EXPERIMENT_HARNESS.py 中实际运
+⾏
+的物理法则： 
+def ground_truth_transition(condition: str, q: str, obj: str, ctx: str, act: str) -▶ str: 
+    ... 
+    if obj == door_obj and act == lift_act: 
+        return target_q 
+    elif obj == cab_obj and act == turn_act: 
+        return second_q 
+    return idle_q 
+法医诊断： 
+1.  形同虚设的 ctx 参数： 在整个分
+⽀
+判定逻辑中，状态转移完全由 obj 和 act 决定。ctx 
+    虽被传
+⼊
+，但在函数体内部完全未被
+⽤
+于任何布尔求值或状态映射。 
+2.  三分类定性： 
+      - A. 上下
+⽂
+⽆
+关
+⼲
+扰项不变性 (Context-Independent Nuisance Invariance) \implies 
+        当前实现的真实属性。 
+      - B. 上下
+⽂
+依赖因果机制迁移 (Context-Dependent Causal Transfer) \implies 当前实现完全
+不存在。 
+      - C. 结构泛化 (Structural Generalization) \implies 不成
+⽴
+。 
+3.  裁决： 当前 D4 在因果
+⽅
+法论上属于伪端点 
+    (Endpoint-Invalid)。它仅测量了模型是否忽略了
+⼀
+个
+⽆
+⽤
+的上下
+⽂
+代号，并没有测量模型能否在
+不同上下
+⽂
+所调控的不同因果机制间迁移。 
+H. Wilcoxon-Pratt 统计算
+⼦
+独
+⽴
+⼀
+致性测试规范 
+(供第三
+⽅
+验证数学实现正确性，不依赖随机性) 
+测试脚本必须在以下 8 类病态与极限样本向量上满
+⾜
+确定性数值输出： 
+| 
+⽤
+例 ID             | 样本输
+⼊
+差值向量 $\vec{d}$ ($N=10$)                                    | 预期秩和统
+计量 $W^+$ | 预期渐近 $p$ 值特征               | 检验判定
+⽬
+标        | 
+| :---------------: 
+| :------------------------------------------------------------- 
+| :-----------: | :------------------------: | :------------ | 
+| **TC-01 (全正向)**   | `[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]`           | $55.0$        | $p 
+< 0.005$                | 极显著拒绝零假设      | 
+| **TC-02 (全负向)**   | `[-0.1, -0.2, -0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9, -1.0]` | $0.0$         
+| $p ▶ 0.999$                | 强
+⼒
+接受零假设       | 
+| **TC-03 (全零值)**   | `[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]`           | $0.0$         | 
+$p = 1.000$                | 统计量
+⽆
+⽅
+差退化      | 
+
+| **TC-04 (对称正负)**  | `[-0.5, -0.4, -0.3, -0.2, -0.1, 0.1, 0.2, 0.3, 0.4, 0.5]`      | $27.5$        
+| $p \approx 0.500$          | 严格
+⽆
+偏对称        | 
+| **TC-05 (
+⼤
+量并列结)** | `[0.2, 0.2, 0.2, 0.2, -0.2, -0.2, -0.2, -0.2, 0.5, -0.5]`      | $27.5$        
+| $p \approx 0.500$          | 平均结秩计算对
+⻬
+      | 
+| **TC-06 (零值主导)**  | `[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.2]`           | $19.0$        | 
+$p \approx 0.05 \sim 0.10$ | Pratt 零值秩保留核验 | 
+| **TC-07 (单极端正值)** | `[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.0]`          | $10.0$        
+| $p ▶ 0.05$                 | 单点
+⽆
+法产
+⽣
+显著性     | 
+| **TC-08 (微弱正偏态)** | `[0.01, 0.01, 0.01, -0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]`      | $6.0$         
+| $p ▶ 0.10$                 | 
+⼩
+样本低
+⽅
+差稳健性     | 
+I. 当前真正有效的声称 (Claims That Are Currently Valid) 
+1.  确定性状态机防线成
+⽴
+：在外部 Python 代码强制执
+⾏
+集合
+⽩
+名单的前提下，模型提交的
+⾮
+法字
+符串不会导致世界状态变量崩溃或就地脏写。 
+2.  纯离散符号搜索器 H_{\text{mid-3}} 具备完全可实现性：在锁定 UCS 节点计数代价与 BFS 
+    产
+⽣
+式顺序后，第三
+⽅
+能够实现
+⽐
+特级全等的基准代码。 
+3.  D1 离线批处理具备抗时序泄漏性：模型在测试期确实处于上下
+⽂
+冻结状态，
+⽆
+法获得未来的真
+实物理反馈。 
+J. 必须降级的声称 (Claims That Must Be Downgraded) 
+1.  “D0 证明了运
+⾏
+时的因果主权与对抗防御” \implies 降级为：“D0 证明了 Harness 
+    在向模型暴露观测时执
+⾏
+了深拷
+⻉
+内存隔离（In-Memory Copy Isolation），且在接收返回值时
+执
+⾏
+了基础的集合成员判定”。 
+2.  “Replay 证明了跨平台位级
+⼀
+致性” \implies 降级为：“Replay 
+    证明了在当前单
+⼀
+平台与解释器下，保存的账本事件与重新执
+⾏
+状态机
+⽣
+成的事件具有 JSON 规
+范序列化等价性”。 
+3.  “D6 证明了抽象表征不变性” \implies 降级为：“D6 
+    证明了模型在经历指定的
+⼀
+组静态符号双射重命名后，其预测在单次批处理测试中的汉明分歧率
+低于预设阈值”。 
+K. v1.0.3 下原则上不可能成
+⽴
+的声称 (Impossible Claims) 
+1.  “系统测量了模型的因果机制发现能
+⼒
+”： 不成
+⽴
+原因：在物理世界根本没有建
+⽴
+上下
+⽂
+依赖因果
+律（D4 破产）、且基准模型族仅形式化了 2 个
+⽽
+⾮
+全部 6 
+    个的前提下，根本
+⽆
+法在数学上区分“特征丢弃”与“因果泛化”。 
+2.  “系统对模型完成了全
+⾯
+的机制可识别性（Identi
+ﬁ
+ability）归因”： 
+    不成
+⽴
+原因：H_{\text{mid-1}}, H_{\text{mid-4}}, H_{\text{mid-5}}, H_{\text{mid-6}} 
+    缺失，因此排他性向量 \mathbf{I} 中有 4 个维度属于未定义计算。任何给出的 COMPATIBLE 
+或 DISTINGUISHED 
+    裁决均缺乏规范基础。 
+L. 未来 v1.1 规范修订的最
+⼩
+必要需求 (Requirements for v1.1) 
+
+若要在未来使 CMAWSE 达到真正的 NORMATIVELY-CLOSED，必须完成以下最
+⼩
+物理与统计闭
+合： 
+1.  物理世界必须真正引
+⼊
+上下
+⽂
+因果边： 修改转移法则，使得在上下
+⽂
+ K 下动作
+⽣
+效，
+⽽
+在上下
+⽂
+ M 
+    下物理机制必须发
+⽣
+显式分叉（例如触发互补规则或反向规则），赋予 D4 真正的因果有效性。 
+2.  形式化全量 H_{\text{mid}} 算法产
+⽣
+式： 补充 H_{\text{mid-1}} 的完整 CART 分裂与平局规范、
+补充 
+    H_{\text{mid-4}} 的
+⻢
+尔可夫阶数与转移矩阵伪代码，杜绝第三
+⽅
+⾃
+⾏
+猜测。 
+3.  提供跨会话聚合评测机 (Study-Level Orchestrator)： 将单会话运
+⾏
+扩展为
+⾃
+动驱动 100 会话、
+收集样本、执
+⾏
+ Wilcoxon 
+    与 Bootstrap 并输出最终 JSON 的主控端点。 
+M. 显式禁
+⽌
+修改清单 (DO NOT CHANGE LIST) 
+为保持基准演进的严谨性，以下内容永久锁定，任何未来的补丁严禁推翻： 
+1.  [FROZEN] 0-based 离散时间步协议与 30 步转移/31 状态时序。 
+2.  [FROZEN] D1 测试期的 Frozen-Context Batch Holdout 协议（严禁恢复逐步在线反馈）。 
+3.  [FROZEN] H_{\text{mid-3}} 的确定性 UCS 节点代价、
+⽂
+法产
+⽣
+式与 1000 节点展开上限。 
+4.  [FROZEN] H_{\text{mid-2}} 的 333 规范原
+⼦
+⼦
+句与字典序优先级仲裁规则。 
+5.  [FROZEN] D6 的 Hyndman-Fan Type 7 分位数闭式定义与单侧
+⾮
+劣性检验框架。 
+6.  [FROZEN] 双轨正交评估输出架构（
+⾏
+为向量 \mathbf{B} 与机制向量 \mathbf{I} 绝不合并）。 
+7.  [FROZEN] 纯
+⾏
+为操作性原则（永不引
+⼊
+ Layer D 内部
+⼼
+智状态假设）。 
+终审判定结论 
+========================================================================
+======== 
+                    FINAL AUDIT CLASSIFICATION: 
+                         BLOCKED-BY-SPEC 
+========================================================================
+======== 
+裁决理由声明： 
+CMAWSE v1.0.3 在底层状态机、PRNG 派
+⽣
+以及 H_{\text{mid-2}} / H_{\text{mid-3}} 
+算法规范上已实现形式化闭合；但在**多模型竞争机制识别（I1–I6 基准族不完备）与上下
+⽂
+因果有
+效性（D4 
+物理转移缺乏上下
+⽂
+依赖）**两个核
+⼼
+科学构件上，存在不可由
+⼯
+程实现代劳的规范缺失。 
+依据实证科学最
+⾼
+诚实原则，严禁宣称当前版本具备完全可实施性（Not 
+Execution-Ready）。系统已稳定沉淀为精确的“局部因果约束基座”，但在上述规范断裂点被正式
+修订并版本化之前，必须保持 
+BLOCKED-BY-SPEC 冻结状态，停
+⽌
+推进 Pilot 数据采集。 
+

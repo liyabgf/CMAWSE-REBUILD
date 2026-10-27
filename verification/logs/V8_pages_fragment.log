@@ -1,0 +1,50 @@
+V8: .pages 片段级复核（PARTIALLY_VERIFIED —— IWA 全文解压未成功，详见方法局限）
+
+CMAWSE Evidence Registry Phase 3.7.pages | literal-run tokens=151 | not-in-corpus/twin=49
+     sample: $11A4DBC7-D672-480B-B1EE-A497080C7DCC
+     sample: %CMAWSE Evidence Registry Phase 3.7:
+     sample: :xicFormalSimplifiedChineseDecima
+CMAWSE Phase II阶段存档.pages | literal-run tokens=6023 | not-in-corpus/twin=1854
+     sample: 在彻底修补了时序边界、文法产生式、版本空间规则集结构及非对称置换统计检验之后，现有规范中的阻塞级歧义点数量已被证明收敛为严格的零（
+     sample: e= Deterministic Uniform-Cost Search (BFS on AST by node count)
+     sample: ] (Counterfactual Stability under Pure Graph Interventions6
+CMAWSE v1.0.3 Freeze Candidate 规范与实现修订报告.pages | literal-run tokens=294 | not-in-corpus/twin=141
+     sample: $5F55DF64-8200-4C84-83FF-2C44AD7AA0C3
+     sample: :xicFormalSimplifiedChineseDecima
+     sample: YX31 ($q_0 \dots q_{30}$)1O8D1
+CMAWSE_Evidence_Registry_Schema_Drift_Conformance_Repair_Pha | literal-run tokens=133 | not-in-corpus/twin=44
+     sample: It does NOT establish that the Registry1
+     sample: $8C6B7ECF-AD48-4899-9135-C31A9CD633E6
+     sample: :xicFormalSimplifiedChineseDecima
+CMAWSE_v1.0.2_Implementation_Frozen_Spec.md.pages | literal-run tokens=181 | not-in-corpus/twin=59
+     sample: ded%4Ls (Machine-independeIg4Timeout Safety
+     sample: $DCD222A2-D6FE-4F1A-81F7-8C720BB3D25C
+     sample: = 500 ms (OS watchdog only; not algI
+Evidence Registry碰真实数据前存档.pages | literal-run tokens=150 | not-in-corpus/twin=44
+     sample: %CMAWSE Evidence Registry Validator Phase 2: Adversarial Fixtures
+     sample: $4E94E31E-5B59-4841-8A8F-AB97341DB4A7
+     sample: :xicFormalSimplifiedChineseDecima
+Phase II Pre-Pilot Forensic Audit：审计报告的“闭合状态”开始领先于实际 evaluat | literal-run tokens=267 | not-in-corpus/twin=126
+     sample: $ensuring bUE\cross-platform identity.A
+     sample: $0A59770E-C5F1-4D83-AB3B-5DB743473D79
+     sample: :xicFormalSimplifiedChineseDecima
+Registry Structural Validity ≠ Numerical Validity ≠ Payload  | literal-run tokens=171 | not-in-corpus/twin=46
+     sample: $2CD935D7-D51C-453C-9A26-C674F0731C71
+     sample: /CMAWSE Evidence Registry Phase 3.6:
+     sample: :xicFormalSimplifiedChineseDecima
+当前阶段.pages | literal-run tokens=1406 | not-in-corpus/twin=376
+     sample: 审计基线：工作区全量历史文档、源码、测试用例、实验日志及法医审计报告 执行原则：绝对只读，零文件改动，不美化历史，不倒灌当前观点，严格区分工程实现事实与科学假设。
+     sample: @reports/CMAWSE_Reconstruct_v2_Independent_Foundational_Report.md
+     sample: , 1_ENGINEERING, 2_BEHAVIORAL, 3_MECHANISTIC, 4_GENERAL_S"
+当规范存在于自然语言文档，而执行规范的模型同时负责把规范翻译成代码时，模型可能把“历史语义上需要的东西”反向注入规范实现 | literal-run tokens=169 | not-in-corpus/twin=63
+     sample: @DIRECTLY_TRACEABL%HPAMBIGUOUS_PROVENANCE"-
+     sample: $38FCF427-6A55-4C4E-A697-25EF76667255
+     sample: :xicFormalSimplifiedChineseDecima
+整理执行一.pages | literal-run tokens=277 | not-in-corpus/twin=123
+     sample: $C5AD38E6-94BF-4578-9386-09A95E1F169F
+     sample: $B28CBB83-E21C-49F1-A672-1283038088A0
+     sample: $240B4200-DF44-4640-B210-1FED1A0FE2B1
+
+方法局限：Snappy 压缩块的回指(copy)段无法由字面量扫描恢复；本核验只能证明
+"未发现 .pages 含语料库/PDF 孪生之外的实质内容"，不能证明逐字节全文一致。
+V8 verdict: PARTIALLY_VERIFIED（全文级 = UNVERIFIED）

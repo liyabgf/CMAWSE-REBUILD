@@ -1,0 +1,6 @@
+assembled: /Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/CMAWSE_v1_0_3_EXPERIMENT_HARNESS.py
+('harness_v3_L60660.py', 1, [], "ImportError: cannot import name 'DiscretePhysicalWorldEngine' from 'CMAWSE_v1_0_3_EXPERIMENT_HARNESS")
+('harness_v5_L61509.py', 1, [], "NameError: name 'Dict' is not defined. Did you mean: 'dict'?")
+('harness_v7_L62449.py', 1, ['Ran 7 tests in 0.052s', 'FAILED (failures=2, errors=4)'], 'FAILED (failures=2, errors=4)')
+ENGINE v6 exit= 0 stdout tail:
+

@@ -1,0 +1,81 @@
+==== V3: F1 两份 Schema v0.1 枚举互斥复核 ====
+[V3-schema1] "TRACEABLE_WITH_CONTEXT" in Evidence Registry.md: 2 hit(s)
+    L3150: | **N03** | `51.6% vs 50.0%` | `在 Target C 与 Target E 中，两者的迁移准确率分别为 51.6% 与 50.0%` | `reports/CMAWSE_Reconstruct_v2_Independent_Foundational_Report.md
+    L3157: | **N10** | `100,000 permutations` | `10^5 次置换` | `reports/CMAWSE_Reconstruct_v2_Independent_Foundational_Report.md` | 第 3 节 (P165) | MW-0.4.1 | 蒙特卡洛符
+[V3-schema1] "DERIVED_REPORT" in Evidence Registry.md: 2 hit(s)
+    L3978: - DERIVED_REPORT         # 经过人类整理/总结的文档（如审计报告、白皮书、实验总结）
+    L4116: artifact_type: ArtifactType (REQUIRED)   # RAW_ARTIFACT vs DERIVED_REPORT
+[V3-schema1] "GENERAL_SCIENTIFIC_CLAIM" in Evidence Registry.md: 2 hit(s)
+    L3507: 7. `GENERAL_SCIENTIFIC_CLAIM`: 全称性科学结论（**在未完成全矩阵前沿模型复现前严格封锁**）。
+    L3511: - 严禁将单模型、单物理环境的 `BEHAVIORAL_RESULT`，跨级提升为面向全体 LLM 的 `GENERAL_SCIENTIFIC_CLAIM`。
+[V3-schema1] "NEGATIVE_CONTROL" in Evidence Registry.md: 1 hit(s)
+    L4086: control_type: enum [TREATMENT, NEGATIVE_CONTROL, SHAM_CONTROL] (REQUIRED)
+[V3-schema1] "PAIRED_TRAJECTORY" in Evidence Registry.md: 1 hit(s)
+    L4100: unit_type: enum [PAIRED_TRAJECTORY, DISCRETE_STEP, SESSION] (REQUIRED)
+[V3-schema2] "AMBIGUOUS_PROVENANCE" in Evidence Registry.md: 2 hit(s)
+    L3220: | **CLAIM-10-A** | 早期无物理阻尼提示词多 Agent 产生空间瞬移与全知穿帮 | 史前探索档案 | `docs/explorations/` | `4_GENERAL_SCIENTIFIC_GENERALIZATION` (早期缺陷) | 早期非结构化提示词实验 | `AMBIG
+    L3270: - **状态**: `AMBIGUOUS_PROVENANCE`（算法原理清晰，但原始计算日志未归档）。
+[V3-schema2] "EXTERNAL_ORACLE" in Evidence Registry.md: 2 hit(s)
+    L4343: - `ProvenanceStatus` (4): `DIRECTLY_TRACEABLE`, `AMBIGUOUS_PROVENANCE`, `UNTRACEABLE`, `EXTERNAL_ORACLE`
+    L4503: - **SCHEMA_ENUM_SET**：`{"DIRECTLY_TRACEABLE", "AMBIGUOUS_PROVENANCE", "UNTRACEABLE", "EXTERNAL_ORACLE"}`
+[V3-schema2] "EMPIRICAL_FACTOR" in Evidence Registry.md: 2 hit(s)
+    L4346: - `ClaimType` (4): `EMPIRICAL_FACTOR`, `INVARIANT_BOUND`, `FALSIFICATION_RECORD`, `REPRODUCIBILITY_ASSERTION`
+    L4521: - **SCHEMA_ENUM_SET**：`{"EMPIRICAL_FACTOR", "INVARIANT_BOUND", "FALSIFICATION_RECORD", "REPRODUCIBILITY_ASSERTION"}`
+[V3-schema2] "INVARIANT_BOUND" in Evidence Registry.md: 2 hit(s)
+    L4346: - `ClaimType` (4): `EMPIRICAL_FACTOR`, `INVARIANT_BOUND`, `FALSIFICATION_RECORD`, `REPRODUCIBILITY_ASSERTION`
+    L4521: - **SCHEMA_ENUM_SET**：`{"EMPIRICAL_FACTOR", "INVARIANT_BOUND", "FALSIFICATION_RECORD", "REPRODUCIBILITY_ASSERTION"}`
+[V3-schema2] "REPRODUCIBILITY_ASSERTION" in Evidence Registry.md: 2 hit(s)
+    L4346: - `ClaimType` (4): `EMPIRICAL_FACTOR`, `INVARIANT_BOUND`, `FALSIFICATION_RECORD`, `REPRODUCIBILITY_ASSERTION`
+    L4521: - **SCHEMA_ENUM_SET**：`{"EMPIRICAL_FACTOR", "INVARIANT_BOUND", "FALSIFICATION_RECORD", "REPRODUCIBILITY_ASSERTION"}`
+[V3-schema2] "BENCHMARK_MANIFEST" in Evidence Registry.md: 2 hit(s)
+    L4345: - `ArtifactType` (5): `CODE`, `LOG`, `REPORT`, `TEST_SUITE`, `BENCHMARK_MANIFEST`
+    L4515: - **SCHEMA_ENUM_SET**：`{"CODE", "LOG", "REPORT", "TEST_SUITE", "BENCHMARK_MANIFEST"}`
+[V3-schema2] "STEP_EXECUTION" in Evidence Registry.md: 2 hit(s)
+    L4349: - `SampleUnitType` (3): `STEP_EXECUTION`, `TRAJECTORY_PAIR`, `SESSION`
+    L4539: - **SCHEMA_ENUM_SET**：`{"STEP_EXECUTION", "TRAJECTORY_PAIR", "SESSION"}`
+[V3-conflict] "DERIVED_REPORT" in Evidence Registry.md: 10 hit(s)
+    L3978: - DERIVED_REPORT         # 经过人类整理/总结的文档（如审计报告、白皮书、实验总结）
+    L4116: artifact_type: ArtifactType (REQUIRED)   # RAW_ARTIFACT vs DERIVED_REPORT
+    L4184: 3. `RULE-DAG-03 (派生隔离)`：`DERIVED_REPORT` 生成的证据，严禁作为推导底层物理因果性质的单一直接依据。
+    L4468: I'm now diving into the discrepancies between schema and implementation for specific enums. For `EvidenceQualityStatus`, the implementation includes '
+    L4516: - **IMPLEMENTATION_ENUM_SET**：`{"CODE", "LOG", "REPORT", "TEST_SUITE", "BENCHMARK_MANIFEST", "DERIVED_REPORT"}`
+    L4518: - **IMPLEMENTATION_MINUS_SCHEMA**：`{"DERIVED_REPORT"}`
+    L4663: - `ArtifactType` (1个)：`DERIVED_REPORT`
+    L4781: I'm now zeroing in on which prototype is affected, and why. I've re-examined the schemas and confirmed `ACTIVE` is not a valid `EpistemicStatus` in th
+    L4796: Now I'm focusing on the remaining prototypes REG-05, REG-09, and REG-10, identifying which schema violations are causing failures. REG-05's `UNRESOLVE
+    L4902: - **FIRST_FAILURE**：`artifact_type='DERIVED_REPORT'` 未在 Schema v0.1 中定义
+[V3-repair] "CONFORMANCE_RESTORED" in Evidence Registry.md: 1 hit(s)
+    L4705: CONFORMANCE_RESTORED
+
+==== V4: F4 Phase 3.8 出处唯一性复核 ====
+  CMAWSE第一阶段.md: "Phase 3.8"=0  "REGISTRY_V0.1_CLOSURE"=0
+  Evidence Registry.md: "Phase 3.8"=0  "REGISTRY_V0.1_CLOSURE"=0
+  整理执行一.txt: "Phase 3.8"=0  "REGISTRY_V0.1_CLOSURE"=0
+  CMAWSE启动.md: "Phase 3.8"=0  "REGISTRY_V0.1_CLOSURE"=0
+  闭环归档.md: "Phase 3.8"=3  "REGISTRY_V0.1_CLOSURE"=3
+  V4 verdict: PASS(仅闭环归档含 Phase 3.8)
+
+==== V5: F6 碰真实数据前存档.pdf 独有内容复核 ====
+  probe containment: 4/60 in corpus | identifiers: 9/17 in corpus
+  V5 verdict: REVIEW
+  孤本关键标识符示例: ['ContainerShapeMismatchError', 'ed_local_claim', 'xture_pass_01_unit_level_standard', 'xture_pass_02_aggregate_multi_sample', 'xture_pass_03_statistical_record_single_exp', 'xture_pass_04_justi']
+
+==== V6: Registry 实现代码在档率复核 ====
+  "class EvidenceRecord": 0 occurrence(s) in all text archives
+  "class ClaimRecord": 0 occurrence(s) in all text archives
+  "class StatisticalRecord": 0 occurrence(s) in all text archives
+  "def _check_granularity": 0 occurrence(s) in all text archives
+  "from pydantic": 49 occurrence(s) in all text archives
+  "import pydantic": 0 occurrence(s) in all text archives
+  "class SummaryRecord": 0 occurrence(s) in all text archives
+  "ConfigDict": 183 occurrence(s) in all text archives
+  models.py 提及次数: ER=34 ZX=25
+  V6 verdict: REVIEW
+
+==== V7: 对话边界与 token 声明复核 ====
+  CMAWSE启动.md: boundaries=1 token_lines=['120,377 tokens']
+  CMAWSE第一阶段.md: boundaries=5 token_lines=['544,605 tokens', '173,687 tokens', '344,962 tokens', '497,232 tokens', '684,187 tokens']
+  Evidence Registry.md: boundaries=2 token_lines=['756,606 tokens', '728,970 tokens']
+  TOTAL tokens (from export headers): 3,850,626
+  说明：header token 数为导出工具自报值，可复核其存在于文本中；但"md 导出 == 完整对话"不可从文件自身复核。
+  V7 verdict: header 数字 VERIFIED；完整性 UNVERIFIED（导出已证明会跳过报告正文，见 V5/F6）

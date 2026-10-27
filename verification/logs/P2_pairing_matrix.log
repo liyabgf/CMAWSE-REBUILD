@@ -1,0 +1,13 @@
+pairing matrix (engine x test):
+  harness_v1_L59440.py         v3:ERROR(import/other error) | v5:ERROR(import/other error) | v7:ERROR(import/other error)
+  harness_v2_L59942.py         v3:ERROR(import/other error) | v5:ERROR(import/other error) | v7:ERROR(import/other error)
+  harness_v4_L60907.py         v3:ERROR(import/other error) | v5:ERROR(import/other error) | v7:FAIL(7 tests)
+  harness_v6_L61914.py         v3:ERROR(import/other error) | v5:ERROR(import/other error) | v7:FAIL(7 tests)
+
+=== 档案内验收声明（L62449 之后的测试结果陈述）===
+  L62686: Ran 7 tests in 0.489s
+  L62688: OK
+  L62758: 在开始理论与规范对账前，首先在当前工作区物理执行 Python 编译与已存在的测试套件，杜绝文本层面的假通过：
+  L62782: Ran 7 tests in 0.492s
+  L62784: OK
+  L62786: *法医定性：上述测试通过仅证明“测试脚本自身通过了断言”，不代表规范具备完备性，亦不能作为实证就绪（Execution-Ready）的证明。以下进入严格的规范完备性审查。*
