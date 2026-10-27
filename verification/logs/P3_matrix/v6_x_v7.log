@@ -1,0 +1,72 @@
+engine=v6 test=harness_v7_L62449.py
+returncode=1
+--- stdout/stderr ---
+test_canonical_replay_cli (__main__.TestPhaseIIConformance.test_canonical_replay_cli) ... FAIL
+test_d0_architectural_isolation_and_interception (__main__.TestPhaseIIConformance.test_d0_architectural_isolation_and_interception)
+Verifies that in-place mutations do not infect runtime and illegal actions are rejected. ... ok
+test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance.test_d1_oracle_passes_and_dummy_fails) ... ERROR
+test_d2_evaluator_strictness (__main__.TestPhaseIIConformance.test_d2_evaluator_strictness) ... ERROR
+test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance.test_d3_study_level_aggregate_wilcoxon)
+Generates multi-session data and verifies D3 study-level Wilcoxon-Pratt. ... FAIL
+test_d5_hypothetical_branch (__main__.TestPhaseIIConformance.test_d5_hypothetical_branch) ... ERROR
+test_d6_bijective_permutation_evaluator (__main__.TestPhaseIIConformance.test_d6_bijective_permutation_evaluator) ... ERROR
+
+======================================================================
+ERROR: test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance.test_d1_oracle_passes_and_dummy_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 116, in test_d1_oracle_passes_and_dummy_fails
+    self.assertTrue(rec_oracle["d1_pass"])
+                    ~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'd1_pass'
+
+======================================================================
+ERROR: test_d2_evaluator_strictness (__main__.TestPhaseIIConformance.test_d2_evaluator_strictness)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 122, in test_d2_evaluator_strictness
+    self.assertTrue(rec_oracle["d2_pass"])
+                    ~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'd2_pass'
+
+======================================================================
+ERROR: test_d5_hypothetical_branch (__main__.TestPhaseIIConformance.test_d5_hypothetical_branch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 135, in test_d5_hypothetical_branch
+    self.assertTrue(rec["d5_pass"])
+                    ~~~^^^^^^^^^^^
+KeyError: 'd5_pass'
+
+======================================================================
+ERROR: test_d6_bijective_permutation_evaluator (__main__.TestPhaseIIConformance.test_d6_bijective_permutation_evaluator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 139, in test_d6_bijective_permutation_evaluator
+    self.assertEqual(rec_oracle["d6_divergence"], 0.0)
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'd6_divergence'
+
+======================================================================
+FAIL: test_canonical_replay_cli (__main__.TestPhaseIIConformance.test_canonical_replay_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 152, in test_canonical_replay_cli
+    self.assertEqual(res.returncode, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance.test_d3_study_level_aggregate_wilcoxon)
+Generates multi-session data and verifies D3 study-level Wilcoxon-Pratt.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 131, in test_d3_study_level_aggregate_wilcoxon
+    self.assertLess(p_val, 0.05)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 0.15865525393145705 not less than 0.05
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.053s
+
+FAILED (failures=2, errors=4)

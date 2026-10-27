@@ -1,0 +1,9 @@
+engine=v6 test=harness_v3_L60660.py
+returncode=1
+--- stdout/stderr ---
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v3_L60660.py", line 20, in <module>
+    from CMAWSE_v1_0_3_EXPERIMENT_HARNESS import (
+    ...<3 lines>...
+    )
+ImportError: cannot import name 'DiscretePhysicalWorldEngine' from 'CMAWSE_v1_0_3_EXPERIMENT_HARNESS' (/tmp/p3m/v6/CMAWSE_v1_0_3_EXPERIMENT_HARNESS.py). Did you mean: 'DiscretePhysicalWorld'?

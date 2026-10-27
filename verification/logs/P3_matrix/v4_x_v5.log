@@ -1,0 +1,12 @@
+engine=v4 test=harness_v5_L61509.py
+returncode=1
+--- stdout/stderr ---
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v5_L61509.py", line 34, in <module>
+    class OracleAgent:
+    ...<38 lines>...
+            return {}
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v5_L61509.py", line 36, in OracleAgent
+    def __call__(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+                                ^^^^
+NameError: name 'Dict' is not defined. Did you mean: 'dict'?

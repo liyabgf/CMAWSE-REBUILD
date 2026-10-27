@@ -1,0 +1,45 @@
+engine=v4 test=harness_v7_L62449.py
+returncode=1
+--- stdout/stderr ---
+test_canonical_replay_cli (__main__.TestPhaseIIConformance.test_canonical_replay_cli) ... FAIL
+test_d0_architectural_isolation_and_interception (__main__.TestPhaseIIConformance.test_d0_architectural_isolation_and_interception)
+Verifies that in-place mutations do not infect runtime and illegal actions are rejected. ... ok
+test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance.test_d1_oracle_passes_and_dummy_fails) ... FAIL
+test_d2_evaluator_strictness (__main__.TestPhaseIIConformance.test_d2_evaluator_strictness) ... ok
+test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance.test_d3_study_level_aggregate_wilcoxon)
+Generates multi-session data and verifies D3 study-level Wilcoxon-Pratt. ... ERROR
+test_d5_hypothetical_branch (__main__.TestPhaseIIConformance.test_d5_hypothetical_branch) ... ok
+test_d6_bijective_permutation_evaluator (__main__.TestPhaseIIConformance.test_d6_bijective_permutation_evaluator) ... ok
+
+======================================================================
+ERROR: test_d3_study_level_aggregate_wilcoxon (__main__.TestPhaseIIConformance.test_d3_study_level_aggregate_wilcoxon)
+Generates multi-session data and verifies D3 study-level Wilcoxon-Pratt.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 128, in test_d3_study_level_aggregate_wilcoxon
+    mean_delta, p_val, passed = self.harness.evaluate_study_d3(records)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'CMAWSEExperimentHarness' object has no attribute 'evaluate_study_d3'
+
+======================================================================
+FAIL: test_canonical_replay_cli (__main__.TestPhaseIIConformance.test_canonical_replay_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 153, in test_canonical_replay_cli
+    self.assertIn("Canonical deterministic replay verified", res.stdout)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Canonical deterministic replay verified' not found in '[*] Verifying CMAWSE Session Log: temp_audit_session.jsonl\n[SUCCESS] Replay verified bit-level identical across 1 sessions. 0 discrepancies.\n'
+
+======================================================================
+FAIL: test_d1_oracle_passes_and_dummy_fails (__main__.TestPhaseIIConformance.test_d1_oracle_passes_and_dummy_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/liyang/Documents/CMAWSE-REBUILD/extracted/phase2/harness_v7_L62449.py", line 116, in test_d1_oracle_passes_and_dummy_fails
+    self.assertTrue(rec_oracle["d1_pass"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.062s
+
+FAILED (failures=2, errors=1)
