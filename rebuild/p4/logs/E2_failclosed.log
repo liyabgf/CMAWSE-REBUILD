@@ -1,0 +1,20 @@
+== E2: 失效封禁矩阵 ==
+
+  CMAWSE-engine  oracle           crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  CMAWSE-engine  dummy            crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  CMAWSE-engine  adversarial      crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  CMAWSE-engine  malformed_none   crash=NO                           infected=0    invalid=0    complete=True  parse_fail=23
+  CMAWSE-engine  malformed_str    crash=NO                           infected=0    invalid=0    complete=True  parse_fail=23
+  CMAWSE-engine  malformed_raise  crash=NO                           infected=0    invalid=0    complete=True  parse_fail=23
+  CMAWSE-engine  malformed_type   crash=AttributeError: 'int' object has no attribute 'get' infected=N/A  invalid=N/A  complete=N/A   parse_fail=N/A
+  CMAWSE-engine  partial_batch    crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  GenericTwin    oracle           crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  GenericTwin    dummy            crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+  GenericTwin    adversarial      crash=NO                           infected=1    invalid=0    complete=True  parse_fail=0
+  GenericTwin    malformed_none   crash=AttributeError: 'NoneType' object has no attribute 'get' infected=N/A  invalid=N/A  complete=N/A   parse_fail=N/A
+  GenericTwin    malformed_str    crash=AttributeError: 'str' object has no attribute 'get' infected=N/A  invalid=N/A  complete=N/A   parse_fail=N/A
+  GenericTwin    malformed_raise  crash=RuntimeError: simulated LLM crash infected=N/A  invalid=N/A  complete=N/A   parse_fail=N/A
+  GenericTwin    malformed_type   crash=AttributeError: 'list' object has no attribute 'get' infected=N/A  invalid=N/A  complete=N/A   parse_fail=N/A
+  GenericTwin    partial_batch    crash=NO                           infected=0    invalid=0    complete=True  parse_fail=0
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p4/E2_FAILCLOSED_MATRIX.csv

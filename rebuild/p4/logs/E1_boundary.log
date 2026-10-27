@@ -1,0 +1,5 @@
+== E1: 信息边界与变异封禁 ==
+[CMAWSE-engine] payload键数=5 键=['available_actions', 'context', 'focal_object', 'state', 'tick']
+[CMAWSE-engine] latent 暴露次数=0/21 | 账本感染=0 | 非法动作被提交=0 | 评估字段齐全=True
+[GenericTwin] payload键数=6 键=['available_actions', 'context', 'focal_object', 'state', 'tick', 'unobserved_latent']
+[GenericTwin] latent 暴露次数=21/21 | 账本感染=1 | 非法动作被提交=0 | 评估字段齐全=False

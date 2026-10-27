@@ -1,0 +1,25 @@
+== 独立重建核对 ==
+独立账本 == 引擎账本 (json 规范化): True
+全局计数: {'q1': 7, 'q2': 7, 'q0': 7}
+首次出现序: ['q1', 'q2', 'q0']
+holdout 真值集合: ['q0']  (全 q0: True)
+holdout (X,act) 键在条件计数中的覆盖: 2/9
+
+== 敏感性分析 ==
+real 场景 strategy=oracle       rule=alpha -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=oracle       rule=first -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=oracle       rule=last  -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=naive_q0     rule=alpha -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=naive_q0     rule=first -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=naive_q0     rule=last  -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=adversarial  rule=alpha -> d1_pass 取值集合 [0]
+real 场景 strategy=adversarial  rule=first -> d1_pass 取值集合 [0]
+real 场景 strategy=adversarial  rule=last  -> d1_pass 取值集合 [0]
+real 场景 strategy=random       rule=alpha -> d1_pass 取值集合 [0]
+real 场景 strategy=random       rule=first -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+real 场景 strategy=random       rule=last  -> d1_pass 取值集合 [0, 1]  [排列/命名敏感]
+
+关键对比（oracle, real 场景）: alpha 规则 d1_pass=[0, 1], first 规则 d1_pass=[0, 1]
+naive_q0（恒 q0 主体）在 first 规则下 real 场景 d1_pass=[0, 1] —— 若含 1 则 P3 修复未恢复区分度
+
+CSV: /Users/liyang/Documents/CMAWSE-REBUILD/rebuild/p4/D1_SENSITIVITY_MATRIX.csv  rows=1008

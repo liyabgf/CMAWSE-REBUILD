@@ -1,0 +1,17 @@
+harness,agent,crashed,ledger_infected,invalid_actions_committed,record_complete,parsing_failures
+CMAWSE-engine,oracle,NO,0,0,True,0
+CMAWSE-engine,dummy,NO,0,0,True,0
+CMAWSE-engine,adversarial,NO,0,0,True,0
+CMAWSE-engine,malformed_none,NO,0,0,True,23
+CMAWSE-engine,malformed_str,NO,0,0,True,23
+CMAWSE-engine,malformed_raise,NO,0,0,True,23
+CMAWSE-engine,malformed_type,AttributeError: 'int' object has no attribute 'get',N/A,N/A,N/A,N/A
+CMAWSE-engine,partial_batch,NO,0,0,True,0
+GenericTwin,oracle,NO,0,0,True,0
+GenericTwin,dummy,NO,0,0,True,0
+GenericTwin,adversarial,NO,1,0,True,0
+GenericTwin,malformed_none,AttributeError: 'NoneType' object has no attribute 'get',N/A,N/A,N/A,N/A
+GenericTwin,malformed_str,AttributeError: 'str' object has no attribute 'get',N/A,N/A,N/A,N/A
+GenericTwin,malformed_raise,RuntimeError: simulated LLM crash,N/A,N/A,N/A,N/A
+GenericTwin,malformed_type,AttributeError: 'list' object has no attribute 'get',N/A,N/A,N/A,N/A
+GenericTwin,partial_batch,NO,0,0,True,0
