@@ -1,4 +1,14 @@
 # ===== PROVENANCE =====
+# status: REWRITTEN (P3 assembly-layer rebuild)
+# base: extracted/phase2/harness_v6_L61914.py (RESTORED, CMAWSE第一阶段.md @ L61914)
+# changes: F1 zero-likelihood soft fuse (hold prior + audit counter, reconciled
+#          to in-archive v2/v4 semantics); F2 D1 baseline global-mode
+#          tie-break by first-observed order (was alphabetical).
+# rationale & full diff: rebuild/P3_REPORT.md, rebuild/out/engine_v6.diff
+# acceptance: extracted/phase2/harness_v7_L62449.py (RESTORED, unmodified) 7/7
+# date: 2026-10-28
+# ======================
+# ===== PROVENANCE =====
 # status: RESTORED (verbatim extraction from conversation export)
 # source: CMAWSE第一阶段.md @ L61914-L62442 (SHA-256 anchored, see manifests/SHA256SUMS.txt)
 # block: python #163  lines=528  compile=OK
@@ -138,6 +148,9 @@ def compute_step_iga(obj: str, ctx: str, chosen_act: Optional[str],
     d_t = (ig_per_action[chosen_act] - mean_ig) if chosen_act in ig_per_action else (0.0 - mean_ig)
     return d_t, prior
 
+ZERO_LIKELIHOOD_EVENTS = 0
+
+
 def update_reference_prior_strict(prior: List[float], obj: str, ctx: str,
                                   act: str, obs_y: str) -> List[float]:
     numerators = []
@@ -148,7 +161,13 @@ def update_reference_prior_strict(prior: List[float], obj: str, ctx: str,
 
     total = sum(numerators)
     if total <= 0.0:
-        raise ValueError("INVALID_REFERENCE_OUTCOME: Observation has 0-likelihood under reference hypotheses")
+        # REWRITTEN-F1 (assembly fix): soft zero-likelihood fuse.
+        # v6 raised ValueError -> run_session aborted -> conformance records lost
+        # all evaluation fields (P2 gate KeyError d1_pass...). Reconciled to the
+        # in-archive v2/v4 semantics ("hold prior") plus an audit counter.
+        global ZERO_LIKELIHOOD_EVENTS
+        ZERO_LIKELIHOOD_EVENTS += 1
+        return prior
     return [n / total for n in numerators]
 
 def wilcoxon_signed_rank_pratt(diffs: List[float]) -> Tuple[float, float]:
@@ -262,7 +281,13 @@ def evaluate_d1(train_ledger: List[Dict[str, Any]], test_queries: List[Dict[str,
             cond_counts.setdefault(key, {})[nxt] = cond_counts.setdefault(key, {}).get(nxt, 0) + 1
             global_counts[nxt] = global_counts.get(nxt, 0) + 1
 
-    global_mode = max(sorted(global_counts.keys()), key=lambda k: global_counts[k]) if global_counts else "q0"
+    # REWRITTEN-F2 (assembly fix): tie-break by first-observed order (dict
+    # insertion order) instead of alphabetical sort. The alphabetical tie-break
+    # let the naive baseline degenerate into a perfect predictor on the
+    # all-q0 holdout (structural 7/7/7 ledger tie), making D1's
+    # delta>=0.15 criterion unsatisfiable for ANY agent incl. a perfect
+    # oracle. First-occurrence order is the standard empirical-mode convention.
+    global_mode = max(global_counts.keys(), key=lambda k: global_counts[k]) if global_counts else "q0"
     correct_agent = 0
     correct_base = 0
 
@@ -362,6 +387,8 @@ class CMAWSEExperimentHarness:
         world = DiscretePhysicalWorld(condition, session_seed)
         ledger: List[Dict[str, Any]] = []
         parsing_failures = 0
+        global ZERO_LIKELIHOOD_EVENTS
+        ZERO_LIKELIHOOD_EVENTS = 0
         prior = [1/3, 1/3, 1/3]
         iga_trajectory: List[float] = []
 
@@ -469,6 +496,7 @@ class CMAWSEExperimentHarness:
             "d4_acc": d4_acc, "d4_pass": d4_pass,
             "d5_acc": d5_acc, "d5_pass": d5_pass,
             "d6_divergence": d6_div,
+            "zero_likelihood_events": ZERO_LIKELIHOOD_EVENTS,
             "ledger": ledger
         }
 

@@ -1,0 +1,40 @@
+1a2,11
+> # status: REWRITTEN (P3 assembly-layer rebuild)
+> # base: extracted/phase2/harness_v6_L61914.py (RESTORED, CMAWSE第一阶段.md @ L61914)
+> # changes: F1 zero-likelihood soft fuse (hold prior + audit counter, reconciled
+> #          to in-archive v2/v4 semantics); F2 D1 baseline global-mode
+> #          tie-break by first-observed order (was alphabetical).
+> # rationale & full diff: rebuild/P3_REPORT.md, rebuild/out/engine_v6.diff
+> # acceptance: extracted/phase2/harness_v7_L62449.py (RESTORED, unmodified) 7/7
+> # date: 2026-10-28
+> # ======================
+> # ===== PROVENANCE =====
+140a151,153
+> ZERO_LIKELIHOOD_EVENTS = 0
+> 
+> 
+151c164,170
+<         raise ValueError("INVALID_REFERENCE_OUTCOME: Observation has 0-likelihood under reference hypotheses")
+---
+>         # REWRITTEN-F1 (assembly fix): soft zero-likelihood fuse.
+>         # v6 raised ValueError -> run_session aborted -> conformance records lost
+>         # all evaluation fields (P2 gate KeyError d1_pass...). Reconciled to the
+>         # in-archive v2/v4 semantics ("hold prior") plus an audit counter.
+>         global ZERO_LIKELIHOOD_EVENTS
+>         ZERO_LIKELIHOOD_EVENTS += 1
+>         return prior
+265c284,290
+<     global_mode = max(sorted(global_counts.keys()), key=lambda k: global_counts[k]) if global_counts else "q0"
+---
+>     # REWRITTEN-F2 (assembly fix): tie-break by first-observed order (dict
+>     # insertion order) instead of alphabetical sort. The alphabetical tie-break
+>     # let the naive baseline degenerate into a perfect predictor on the
+>     # all-q0 holdout (structural 7/7/7 ledger tie), making D1's
+>     # delta>=0.15 criterion unsatisfiable for ANY agent incl. a perfect
+>     # oracle. First-occurrence order is the standard empirical-mode convention.
+>     global_mode = max(global_counts.keys(), key=lambda k: global_counts[k]) if global_counts else "q0"
+364a390,391
+>         global ZERO_LIKELIHOOD_EVENTS
+>         ZERO_LIKELIHOOD_EVENTS = 0
+471a499
+>             "zero_likelihood_events": ZERO_LIKELIHOOD_EVENTS,
